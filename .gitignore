@@ -1,0 +1,16 @@
+# editor
+.idea
+
+# Ignore Mac DS_Store files
+.DS_Store
+
+# node modules
+node_modules/
+vendor/
+
+#build
+build/
+
+#host redentials
+gulpfile-host-credentials.json
+.env

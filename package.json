@@ -1,0 +1,11 @@
+{
+  "name": "mistape",
+  "version": "1.0.0",
+  "scripts": {
+    "make-pot": "gulp make-pot"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-wp-pot": "^2.5.0"
+  }
+}
