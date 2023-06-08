@@ -1,8 +1,12 @@
-=== Mistape ===
-Tags: mistake, mistype, spell, spelling error, report error
-Requires at least: 6.0.0
-Tested up to: 6.2.2
-License: GPLv2 or later
+# Mistape #
+**Tags:** mistape, spelling errors, misspelling
+**Requires at least:** 4.5.0  
+**Tested up to:** 6.1.0  
+**Stable tag:** 2.4.7  
+**License:** GPLv2 or later
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+
+## Description ##
 
 Mistape is lightweight plugin, that allows readers to effortlessly notify site staff about found spelling errors.
 
@@ -15,6 +19,16 @@ Mistape is full of hooks enabling you to modify its behavior the way you like.
 
 You can easily customize plugin in your colors and chose one from the icons near to the message in posts.
 
-== Installation ==
-1. Look up "Mistape" and and install it from plugins section of your site's admin area. Alternatively, download zip from WordPress.org Plugin Directory and extract its contents to wp-content/plugins directory.
-2. Activate and follow the settings link in the notice you will see at the top. Tick desired checkboxes, save, and that's it!
+### Support ###
+
+Please report any bugs, errors, warnings, code problems to [Github](https://github.com/natata7/mistape/issues)
+
+## Installation ##
+
+1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Go to Settings > Mistape and set options.
+
+
+### 1.0 ###
+* Initial release.
