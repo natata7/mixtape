@@ -1,23 +1,51 @@
 <?php
+// phpcs:disable WordPress.Security.NonceVerification.Missing
 
-class Mistape_Ajax extends Mistape_Abstract {
+/**
+ * [Description Mixtape_Ajax]
+ */
+class Mixtape_Ajax extends Mixtape_Abstract {
 
+	/**
+	 * @var [type]
+	 */
 	public $request;
+	/**
+	 * @var [type]
+	 */
 	public $reported_text;
+	/**
+	 * @var [type]
+	 */
 	public $url;
+	/**
+	 * @var [type]
+	 */
 	public $post_id;
+	/**
+	 * @var [type]
+	 */
 	public $post_author;
+	/**
+	 * @var [type]
+	 */
 	public $user;
+	/**
+	 * @var [type]
+	 */
 	public $reporter_ip;
+	/**
+	 * @var [type]
+	 */
 	private static $supported_actions = array(
-		'mistape_report_error',
-		'mistape_preview_dialog',
+		'mixtape_report_error',
+		'mixtape_preview_dialog',
 		'update-plugin',
 	);
 
 	public static function maybe_instantiate() {
 		if ( isset( $_REQUEST['action'] ) && in_array( $_REQUEST['action'], self::$supported_actions ) ) {
-			new self;
+			new self();
 		}
 	}
 
@@ -32,11 +60,11 @@ class Mistape_Ajax extends Mistape_Abstract {
 		$this->load_textdomain();
 
 		// frontend
-		add_action( 'wp_ajax_mistape_report_error', array( $this, 'ajax_process_report' ) );
-		add_action( 'wp_ajax_nopriv_mistape_report_error', array( $this, 'ajax_process_report' ) );
+		add_action( 'wp_ajax_mixtape_report_error', array( $this, 'ajax_process_report' ) );
+		add_action( 'wp_ajax_nopriv_mixtape_report_error', array( $this, 'ajax_process_report' ) );
 
 		// admin preview
-		add_action( 'wp_ajax_mistape_preview_dialog', array( $this, 'ajax_update_admin_dialog' ) );
+		add_action( 'wp_ajax_mixtape_preview_dialog', array( $this, 'ajax_update_admin_dialog' ) );
 	}
 
 	/**
@@ -46,11 +74,11 @@ class Mistape_Ajax extends Mistape_Abstract {
 
 		// sanitize $_POST
 		$this->request       = array(
-			'selection'       => ! empty( $_POST['selection'] ) ? sanitize_text_field( stripslashes( $_POST['selection'] ) ) : '',
-			'word'            => ! empty( $_POST['word'] ) ? sanitize_text_field( stripslashes( $_POST['word'] ) ) : '',
-			'context'         => ! empty( $_POST['context'] ) ? sanitize_text_field( stripslashes( $_POST['context'] ) ) : '',
-			'replace_context' => ! empty( $_POST['replace_context'] ) ? sanitize_text_field( stripslashes( $_POST['replace_context'] ) ) : '',
-			'comment'         => ! empty( $_POST['comment'] ) ? sanitize_text_field( stripslashes( $_POST['comment'] ) ) : '',
+			'selection'       => ! empty( $_POST['selection'] ) ? stripslashes( sanitize_text_field( $_POST['selection'] ) ) : '',
+			'word'            => ! empty( $_POST['word'] ) ? stripslashes( sanitize_text_field( $_POST['word'] ) ) : '',
+			'context'         => ! empty( $_POST['context'] ) ? stripslashes( sanitize_text_field( $_POST['context'] ) ) : '',
+			'replace_context' => ! empty( $_POST['replace_context'] ) ? stripslashes( sanitize_text_field( $_POST['replace_context'] ) ) : '',
+			'comment'         => ! empty( $_POST['comment'] ) ? stripslashes( sanitize_text_field( $_POST['comment'] ) ) : '',
 		);
 		$this->reported_text = $this->get_reported_text();
 		$this->url           = wp_get_referer();
@@ -70,32 +98,34 @@ class Mistape_Ajax extends Mistape_Abstract {
 
 		if ( ! $this->validate_ip() ) {
 			wp_send_json_error( array(
-				'title'   => __( 'Report not sent', 'mistape' ),
-				'message' => __( 'Spam protection: too many reports from your IP address.', 'mistape' ),
+				'title'   => __( 'Report not sent', 'mixtape' ),
+				'message' => __( 'Spam protection: too many reports from your IP address.', 'mixtape' ),
 			) );
 		}
 
 		// do not process reports without selection data
 		if ( ! $this->request['selection'] ) {
 			wp_send_json_error( array(
-				'title'   => __( 'Report not sent', 'mistape' ),
-				'message' => __( 'No text selected.', 'mistape' ),
+				'title'   => __( 'Report not sent', 'mixtape' ),
+				'message' => __( 'No text selected.', 'mixtape' ),
 			) );
 		}
 
-		do_action( 'mistape_process_report', $this );
+		do_action( 'mixtape_process_report', $this );
 
 		$db_data = $this->get_db_data();
 		if ( $this->is_report_unique( $db_data ) ) {
 			$this->record_report( $db_data );
 		} else {
 			wp_send_json_error( array(
-				'title'   => __( 'Thanks!', 'mistape' ),
-				'message' => __( "Our editors already got notified about this error. Thanks for your care.", 'mistape' ),
+				'title'   => __( 'Thanks!', 'mixtape' ),
+				'message' => __( 'Our editors already got notified about this error. Thanks for your care.', 'mixtape' ),
 			) );
 		}
 
-		if ( $stop = apply_filters( 'mistape_custom_email_handling', false, $this ) ) {
+		$stop = apply_filters( 'mixtape_custom_email_handling', false, $this );
+
+		if ( $stop ) {
 			return;
 		}
 
@@ -103,13 +133,13 @@ class Mistape_Ajax extends Mistape_Abstract {
 
 		if ( $result ) {
 			wp_send_json_success( array(
-				'title'   => __( 'Thanks!', 'mistape' ),
-				'message' => __( 'Our editors are notified.', 'mistape' ),
+				'title'   => __( 'Thanks!', 'mixtape' ),
+				'message' => __( 'Our editors are notified.', 'mixtape' ),
 			) );
 		} else {
 			wp_send_json_error( array(
-				'title'   => __( 'Report not sent', 'mistape' ),
-				'message' => __( "Email service returned an error while trying to deliver your report.", 'mistape' ),
+				'title'   => __( 'Report not sent', 'mixtape' ),
+				'message' => __( 'Email service returned an error while trying to deliver your report.', 'mixtape' ),
 			) );
 		}
 	}
@@ -117,8 +147,8 @@ class Mistape_Ajax extends Mistape_Abstract {
 	public function ajax_update_admin_dialog() {
 		if ( ! empty( $_POST['mode'] ) ) {
 			$args = array(
-				'mode'                  => $_POST['mode'],
-				'reported_text_preview' => 'Lorem <span class="mistape_mistake_highlight">upsum</span> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+				'mode'                  => sanitize_text_field( $_POST['mode'] ),
+				'reported_text_preview' => 'Lorem <span class="mixtape_mistake_highlight">upsum</span> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 			);
 			wp_send_json_success( $this->get_dialog_html( $args ) );
 		}
@@ -130,13 +160,13 @@ class Mistape_Ajax extends Mistape_Abstract {
 	 * Get recipient email
 	 */
 	public function get_recipient_email() {
-		if ( $this->options['email_recipient']['post_author_first'] == 'yes' && $this->post_author ) {
+		if ( 'yes' == $this->options['email_recipient']['post_author_first'] && $this->post_author ) {
 			return get_the_author_meta( 'user_email', $this->post_author );
 		}
 
-		if ( $this->options['email_recipient']['type'] == 'other' && $this->options['email_recipient']['email'] ) {
+		if ( 'other' == $this->options['email_recipient']['type'] && $this->options['email_recipient']['email'] ) {
 			return $this->options['email_recipient']['email'];
-		} elseif ( $this->options['email_recipient']['type'] != 'other' && $this->options['email_recipient']['id'] ) {
+		} elseif ( 'other' != $this->options['email_recipient']['type'] && $this->options['email_recipient']['id'] ) {
 			return get_the_author_meta( 'user_email', $this->options['email_recipient']['id'] );
 		} else {
 			return get_bloginfo( 'admin_email' );
@@ -144,15 +174,16 @@ class Mistape_Ajax extends Mistape_Abstract {
 	}
 
 	/**
-	 * duplicate of original WP function excluding user capabilities check
+	 * Duplicate of original WP function excluding user capabilities check
 	 *
-	 * @param int    $id
-	 * @param string $context
+	 * @param int    $id id
+	 * @param string $context context
 	 *
 	 * @return mixed|null|void
 	 */
 	public static function get_edit_post_link( $id = 0, $context = 'display' ) {
-		if ( ! $post = get_post( $id ) ) {
+		$post = get_post( $id );
+		if ( ! $post ) {
 			return null;
 		}
 
@@ -169,9 +200,11 @@ class Mistape_Ajax extends Mistape_Abstract {
 			return null;
 		}
 
-		// this part of original WP function is commented out
-		/*if ( !current_user_can( 'edit_post', $post->ID ) )
-			return;
+		/*
+		* This part of original WP function is commented out
+		*
+		* if ( !current_user_can( 'edit_post', $post->ID ) )
+		*	return;
 		*/
 
 		return apply_filters( 'get_edit_post_link', admin_url( sprintf( $post_type_object->_edit_link . $action, $post->ID ) ), $post->ID, $context );
@@ -190,38 +223,39 @@ class Mistape_Ajax extends Mistape_Abstract {
 		$reported_text = $this->get_reported_text();
 
 		// referrer
-		$message = '<p>' . __( 'Reported from page:', 'mistape' ) . ' ';
-		$message .= ! empty( $this->url ) ? '<a href="' . $this->url . '">' . urldecode( $this->url ) . '</a>' : _x( 'unknown', '[Email] Reported from page: unknown', 'mistape' );
+		$message = '<p>' . __( 'Reported from page:', 'mixtape' ) . ' ';
+		$message .= ! empty( $this->url ) ? '<a href="' . $this->url . '">' . urldecode( $this->url ) . '</a>' : _x( 'unknown', '[Email] Reported from page: unknown', 'mixtape' );
 		$message .= "</p>\n";
 
 		// post edit link
 		if ( $this->post_id ) {
-			if ( $edit_post_link = $this->get_edit_post_link( $this->post_id, 'raw' ) ) {
-				$message .= '<p>' . __( 'Post edit URL:', 'mistape' ) . ' <a href="' . $edit_post_link . '">' . $edit_post_link . "</a></p>\n";
+			$edit_post_link = $this->get_edit_post_link( $this->post_id, 'raw' );
+			if ( $edit_post_link ) {
+				$message .= '<p>' . __( 'Post edit URL:', 'mixtape' ) . ' <a href="' . $edit_post_link . '">' . $edit_post_link . "</a></p>\n";
 			}
 		}
 
 		// reported by
 		if ( $this->user->ID ) {
-			$message .= '<p>' . __( 'Reported by:', 'mistape' ) . ' ' . $this->user->display_name . ' (<a href="mailto:' . $this->user->data->user_email . '">' . $this->user->data->user_email . "</a>)</p>\n";
+			$message .= '<p>' . __( 'Reported by:', 'mixtape' ) . ' ' . $this->user->display_name . ' (<a href="mailto:' . $this->user->data->user_email . '">' . $this->user->data->user_email . "</a>)</p>\n";
 		}
 		// reported text
-		$message .= '<h3>' . __( 'Reported text', 'mistape' ) . ":</h3>\n";
+		$message .= '<h3>' . __( 'Reported text', 'mixtape' ) . ":</h3>\n";
 		$message .= '<div style="padding: 8px; border: 1px solid #eee; font-size: 18px; line-height: 26px"><code>' . $reported_text . "</code></div>\n";
 
 		if ( $this->request['comment'] ) {
-			$message .= '<h3>' . __( 'Comment:', 'mistape' ) . "</h3>\n";
+			$message .= '<h3>' . __( 'Comment:', 'mixtape' ) . "</h3>\n";
 			$message .= '<div style="padding: 8px; border: 1px solid #eee; font-size: 14px; line-height: 20px">' . $this->request['comment'] . "</div>\n";
 		}
 
-		return apply_filters( 'mistape_mail_message', $message, $this->url, $this->user );
+		return apply_filters( 'mixtape_mail_message', $message, $this->url, $this->user );
 	}
 
 	public function send_email() {
 		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 
-		$to      = apply_filters( 'mistape_mail_recipient', $this->recipient_email, $this->url, $this->user );
-		$subject = apply_filters( 'mistape_mail_subject', __( 'Spelling error reported', 'mistape' ), $this->url, $this->user );
+		$to      = apply_filters( 'mixtape_mail_recipient', $this->recipient_email, $this->url, $this->user );
+		$subject = apply_filters( 'mixtape_mail_subject', __( 'Spelling error reported', 'mixtape' ), $this->url, $this->user );
 		$message = $this->get_email_body();
 
 		return wp_mail( $to, $subject, $message, $headers );
@@ -242,24 +276,34 @@ class Mistape_Ajax extends Mistape_Abstract {
 			'selection_context'         => $this->request['context'] != $this->request['replace_context'] ? $this->request['context'] : null,
 			'comment'                   => $this->request['comment'],
 			'url'                       => $this->url,
-			'agent'                     => isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : null,
+			'agent'                     => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_textarea_field( $_SERVER['HTTP_USER_AGENT'] ) : null,
 		);
 	}
 
 	public function record_report( $data ) {
 		global $wpdb;
-		$table_name = $wpdb->base_prefix . 'mistape_reports';
+		$table_name = $wpdb->base_prefix . 'mixtape_reports';
 		$result     = $wpdb->insert( $table_name, $data );
-		do_action( 'mistape_new_record', $data, $result );
+		do_action( 'mixtape_new_record', $data, $result );
 	}
 
 	public function is_report_unique( $data ) {
 		global $wpdb;
-		$table_name = $wpdb->base_prefix . 'mistape_reports';
+		$table_name = $wpdb->base_prefix . 'mixtape_reports';
 
 		$blog_id = get_current_blog_id();
 
-		$existing = $wpdb->get_results( $wpdb->prepare( "SELECT selection, selection_word FROM $table_name WHERE url=%s AND blog_id = $blog_id AND date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY)", $data['url'] ), ARRAY_A );
+		$existing = $wpdb->get_results(
+			$wpdb->prepare(
+				'SELECT selection, selection_word 
+				FROM %s 
+				WHERE url=%s 
+				AND blog_id = %d 
+				AND date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY)',
+				$table_name,
+				$data['url'],
+				$blog_id ),
+			ARRAY_A );
 
 		foreach ( $existing as $existing_record ) {
 			$existing_record['selection_word'] = $existing_record['selection_word'] ? $existing_record['selection_word'] : $existing_record['selection'];
@@ -287,13 +331,13 @@ class Mistape_Ajax extends Mistape_Abstract {
 	 */
 	public static function get_ip_address() {
 		if ( isset( $_SERVER['X-Real-IP'] ) ) {
-			return $_SERVER['X-Real-IP'];
+			return sanitize_text_field( $_SERVER['X-Real-IP'] );
 		} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
 			// Proxy servers can send through this header like this: X-Forwarded-For: client1, proxy1, proxy2
 			// Make sure we always only send through the first IP in the list which should always be the client IP.
-			return trim( current( explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) );
+			return trim( current( explode( ',', sanitize_text_field( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) ) );
 		} elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
-			return $_SERVER['REMOTE_ADDR'];
+			return sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
 		}
 
 		return null;
@@ -308,8 +352,16 @@ class Mistape_Ajax extends Mistape_Abstract {
 		}
 		$blog_id = get_current_blog_id();
 		// check reporting frequency
-		$sql            = $wpdb->prepare( "SELECT date  FROM `" . $wpdb->base_prefix . self::DB_TABLE . "` WHERE reporter_IP='%s' and blog_id = $blog_id AND date >= DATE_ADD(CURDATE(), INTERVAL -1 DAY) ORDER BY date DESC", $this->reporter_ip );
-		$todays_reports = $wpdb->get_results( $sql, ARRAY_A );
+
+		$todays_reports = $wpdb->get_results(
+			$wpdb->prepare(
+			'SELECT date 
+			FROM ' . $wpdb->prefix . 'mixtape_reports
+			WHERE reporter_IP = %s and blog_id = %d 
+			AND date >= DATE_ADD(CURDATE(), INTERVAL -1 DAY) 
+			ORDER BY date DESC',
+			$this->reporter_ip, $blog_id ),
+			ARRAY_A );
 
 		// check total reports for past 24 hours
 		if ( count( $todays_reports ) > 30 ) {

@@ -6,15 +6,15 @@
     font-style: normal
 }
 
-#mistape-configuration form {
+#mixtape-configuration form {
     position: relative;
 }
 
-#mistape-configuration form table {
+#mixtape-configuration form table {
     width: calc(100% - 310px);
 }
 
-#mistape-sidebar {
+#mixtape-sidebar {
     position: absolute;
     top: 22px;
     right: 20px;
@@ -78,22 +78,22 @@
     padding-left: 15px;
 }
 
-#mistape_custom_caption_text {
+#mixtape_custom_caption_text {
     width: 100%;
     max-width: 600px;
 }
 
-.mistape-tab-contents .submit .description a {
+.mixtape-tab-contents .submit .description a {
     text-decoration: none;
 }
 
-.mistape-tab-contents .submit .dashicons-thumbs-up,
-.mistape-vote {
+.mixtape-tab-contents .submit .dashicons-thumbs-up,
+.mixtape-vote {
     margin-top: -3px;
 }
 
 @media screen and (max-width: 840px) {
-    #mistape-sidebar {
+    #mixtape-sidebar {
         position: relative;
         right: initial;
         top: initial;
@@ -104,47 +104,47 @@
         width: calc(100% - 30px);
     }
 
-    #mistape-configuration form table {
+    #mixtape-configuration form table {
         width: 100%;
     }
 }
 
-[class^="mistape-var"] {
+[class^="mixtape-var"] {
     color: #9876AA;
     padding: 2px;
     font-style: normal;
 }
 
-[class^="mistape-var-"]:before {
+[class^="mixtape-var-"]:before {
     font-style: italic;
     color: #aaa;
 }
 
-.mistape-var-arr:before {
+.mixtape-var-arr:before {
     content: "arr ";
 }
 
-.mistape-var-bool:before {
+.mixtape-var-bool:before {
     content: "bool ";
 }
 
-.mistape-var-obj:before {
+.mixtape-var-obj:before {
     content: "obj ";
 }
 
-.mistape-var-str:before {
+.mixtape-var-str:before {
     content: "str ";
 }
 
-.mistape-hook-block {
+.mixtape-hook-block {
     margin-bottom: 20px;
 }
 
-.mistape-hook-block>p.description {
+.mixtape-hook-block>p.description {
     margin-left: 6px;
 }
 
-#mistape-configuration .spinner {
+#mixtape-configuration .spinner {
     float: none;
 }
 
@@ -203,8 +203,8 @@
     margin-right: -2px;
 }
 
-[class^="mistape-icon-after-"]:after,
-[class*=" mistape-icon-after-"]:after {
+[class^="mixtape-icon-after-"]:after,
+[class*=" mixtape-icon-after-"]:after {
     display: inline-block;
     vertical-align: middle;
     font-family: "iconFont";
@@ -219,33 +219,33 @@
     text-transform: none;
 }
 
-.mistape-icon-after-question:after {
+.mixtape-icon-after-question:after {
     content: '\EA01';
 }
 
-#mistape_statistics .inside .hover-image {
+#mixtape_statistics .inside .hover-image {
     position: relative;
     cursor: pointer;
     -webkit-transition: .2s color ease-in-out;
     transition: .2s color ease-in-out
 }
 
-#mistape_statistics .inside .hover-image:before {
+#mixtape_statistics .inside .hover-image:before {
     position: absolute;
     top: 3px;
     left: 0;
     font-size: 15px
 }
 
-#mistape_statistics .inside .hover-image:hover {
+#mixtape_statistics .inside .hover-image:hover {
     color: #c3c3c3
 }
 
-#mistape_statistics .inside .hover-image:hover:before {
+#mixtape_statistics .inside .hover-image:hover:before {
     color: #3c286e
 }
 
-#mistape_statistics .inside .hover-image .tooltip-img {
+#mixtape_statistics .inside .hover-image .tooltip-img {
     display: none;
     position: absolute;
     top: 0;
@@ -258,6 +258,6 @@
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3)
 }
 
-#mistape_statistics .inside .hover-image.tooltip-show .tooltip-img {
+#mixtape_statistics .inside .hover-image.tooltip-show .tooltip-img {
     display: block
 }

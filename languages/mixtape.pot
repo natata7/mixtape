@@ -1,12 +1,12 @@
-# Copyright (C) 2023 Mistape
-# This file is distributed under the same license as the Mistape package.
+# Copyright (C) 2023 Mixtape
+# This file is distributed under the same license as the Mixtape package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mistape\n"
+"Project-Id-Version: Mixtape\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-05-23 17:44+0000\n"
+"POT-Creation-Date: 2023-07-14 11:27+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -14,348 +14,348 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/class-mistape-abstract.php:98
-msgid "If you have found a spelling error, please, notify us by selecting that text and pressing <em>Ctrl+Enter</em>."
+#: src/class-mixtape-abstract.php:92
+msgid "<b>Found an error?</b> Highlight the text and press the combination <em>Ctrl</em> + <em>Enter</em>."
 msgstr ""
 
-#: src/class-mistape-abstract.php:136
+#: src/class-mixtape-abstract.php:128
 msgid "Spelling error report"
 msgstr ""
 
-#: src/class-mistape-abstract.php:137
+#: src/class-mixtape-abstract.php:129
 msgid "The following text will be sent to our editors:"
 msgstr ""
 
-#: src/class-mistape-abstract.php:139
+#: src/class-mixtape-abstract.php:131
 msgid "Cancel"
 msgstr ""
 
-#: src/class-mistape-abstract.php:140
+#: src/class-mixtape-abstract.php:132
 msgid "Send"
 msgstr ""
 
-#: src/class-mistape-abstract.php:130, src/class-mistape-ajax.php:93, src/class-mistape-ajax.php:106
+#: src/class-mixtape-abstract.php:122, src/class-mixtape-ajax.php:93, src/class-mixtape-ajax.php:106
 msgid "Thanks!"
 msgstr ""
 
-#: src/class-mistape-abstract.php:131, src/class-mistape-ajax.php:107
+#: src/class-mixtape-abstract.php:123, src/class-mixtape-ajax.php:107
 msgid "Our editors are notified."
 msgstr ""
 
-#: src/class-mistape-abstract.php:132
+#: src/class-mixtape-abstract.php:124
 msgid "Close"
 msgstr ""
 
-#: src/class-mistape-abstract.php:144
+#: src/class-mixtape-abstract.php:136
 msgid "Your comment (optional)"
 msgstr ""
 
-#: src/class-mistape-admin.php:63
+#: src/class-mixtape-admin.php:59
 msgid "Administrator"
 msgstr ""
 
-#: src/class-mistape-admin.php:64
+#: src/class-mixtape-admin.php:60
 msgid "Editor"
 msgstr ""
 
-#: src/class-mistape-admin.php:65
+#: src/class-mixtape-admin.php:61
 msgid "Specify other"
 msgstr ""
 
-#: src/class-mistape-admin.php:69
+#: src/class-mixtape-admin.php:65
 msgid "Text"
 msgstr ""
 
-#: src/class-mistape-admin.php:70
+#: src/class-mixtape-admin.php:66
 msgid "Image"
 msgstr ""
 
-#: src/class-mistape-admin.php:71
+#: src/class-mixtape-admin.php:67
 msgid "Do not show caption at the bottom of post"
 msgstr ""
 
-#: src/class-mistape-admin.php:76
+#: src/class-mixtape-admin.php:72
 msgid "Default"
 msgstr ""
 
-#: src/class-mistape-admin.php:77
+#: src/class-mixtape-admin.php:73
 msgid "automatically translated to supported languages"
 msgstr ""
 
-#: src/class-mistape-admin.php:80
+#: src/class-mixtape-admin.php:76
 msgid "Custom text"
 msgstr ""
 
-#: src/class-mistape-admin.php:86
+#: src/class-mixtape-admin.php:82
 msgid "Just notify of successful submission"
 msgstr ""
 
-#: src/class-mistape-admin.php:87
+#: src/class-mixtape-admin.php:83
 msgid "Show preview of reported text and ask confirmation"
 msgstr ""
 
-#: src/class-mistape-admin.php:88
+#: src/class-mixtape-admin.php:84
 msgid "Preview and comment field"
 msgstr ""
 
-#: src/class-mistape-admin.php:141
+#: src/class-mixtape-admin.php:135
 msgid "Configuration"
 msgstr ""
 
-#: src/class-mistape-admin.php:147
+#: src/class-mixtape-admin.php:141
 msgid "Help"
 msgstr ""
 
-#: src/class-mistape-admin.php:166
+#: src/class-mixtape-admin.php:160
 msgid "Statistics"
 msgstr ""
 
-#: src/class-mistape-admin.php:172
+#: src/class-mixtape-admin.php:166
 msgid "Reports received up to date:"
 msgstr ""
 
-#: src/class-mistape-admin.php:205
+#: src/class-mixtape-admin.php:198
 msgid "Email recipient"
 msgstr ""
 
-#: src/class-mistape-admin.php:212
+#: src/class-mixtape-admin.php:205
 msgid "Post types"
 msgstr ""
 
-#: src/class-mistape-admin.php:219, src/class-mistape-admin.php:851
+#: src/class-mixtape-admin.php:212, src/class-mixtape-admin.php:824
 msgid "Shortcodes"
 msgstr ""
 
-#: src/class-mistape-admin.php:226
+#: src/class-mixtape-admin.php:219
 msgid "Caption format"
 msgstr ""
 
-#: src/class-mistape-admin.php:233
+#: src/class-mixtape-admin.php:226
 msgid "Caption text mode"
 msgstr ""
 
-#: src/class-mistape-admin.php:240
+#: src/class-mixtape-admin.php:233
 msgid "Icon before the caption text"
 msgstr ""
 
-#: src/class-mistape-admin.php:247
+#: src/class-mixtape-admin.php:240
 msgid "Color scheme"
 msgstr ""
 
-#: src/class-mistape-admin.php:254
+#: src/class-mixtape-admin.php:247
 msgid "Dialog mode"
 msgstr ""
 
-#: src/class-mistape-admin.php:263
+#: src/class-mixtape-admin.php:256
 msgid "Multisite inheritance"
 msgstr ""
 
-#: src/class-mistape-admin.php:332
+#: src/class-mixtape-admin.php:323
 msgctxt "select option, shown when no users with editor role are present"
 msgid "no editors found"
 msgstr ""
 
-#: src/class-mistape-admin.php:339
+#: src/class-mixtape-admin.php:330
 msgid "separate multiple recipients with commas"
 msgstr ""
 
-#: src/class-mistape-admin.php:346
+#: src/class-mixtape-admin.php:337
 msgid "If post ID is determined, notify post author instead"
 msgstr ""
 
-#: src/class-mistape-admin.php:368
+#: src/class-mixtape-admin.php:358
 msgid "\"Press Ctrl+Enter&hellip;\" captions will be displayed at the bottom of selected post types."
 msgstr ""
 
-#: src/class-mistape-admin.php:383
-msgid "Register <code>[mistape]</code> shortcode."
+#: src/class-mixtape-admin.php:372
+msgid "Register <code>[mixtape]</code> shortcode."
 msgstr ""
 
-#: src/class-mistape-admin.php:387
+#: src/class-mixtape-admin.php:376
 msgid "Enable if manual caption insertion via shortcodes is needed."
 msgstr ""
 
-#: src/class-mistape-admin.php:388
+#: src/class-mixtape-admin.php:377
 msgid "Usage examples are in Help section."
 msgstr ""
 
-#: src/class-mistape-admin.php:389
-msgid "When enabled, Mistape Ctrl+Enter listener works on all pages, not only on enabled post types."
+#: src/class-mixtape-admin.php:378
+msgid "When enabled, mixtape Ctrl+Enter listener works on all pages, not only on enabled post types."
 msgstr ""
 
-#: src/class-mistape-admin.php:412
+#: src/class-mixtape-admin.php:400
 msgid "Enter the full image URL starting with http://"
 msgstr ""
 
-#: src/class-mistape-admin.php:456
+#: src/class-mixtape-admin.php:442
 msgid "no icon"
 msgstr ""
 
-#: src/class-mistape-admin.php:481
+#: src/class-mixtape-admin.php:466
 msgid "default color"
 msgstr ""
 
-#: src/class-mistape-admin.php:506
+#: src/class-mixtape-admin.php:490
 msgid "Preview dialog"
 msgstr ""
 
-#: src/class-mistape-admin.php:522
+#: src/class-mixtape-admin.php:505
 msgid "Copy settings from main site when new blog is created"
 msgstr ""
 
-#: src/class-mistape-admin.php:596
+#: src/class-mixtape-admin.php:578
 msgid "ERROR: You didn't select valid email recipient."
 msgstr ""
 
-#: src/class-mistape-admin.php:584
+#: src/class-mixtape-admin.php:566
 msgid "ERROR: You entered invalid email address: %s"
 msgstr ""
 
-#: src/class-mistape-admin.php:624
+#: src/class-mixtape-admin.php:606
 msgid "ERROR: You didn't enter caption image URL."
 msgstr ""
 
-#: src/class-mistape-admin.php:672
+#: src/class-mixtape-admin.php:653
 msgid "Settings"
 msgstr ""
 
-#: src/class-mistape-admin.php:793
-msgid "<strong>Mistape</strong> must now be <a href=\"%s\">configured</a> before use."
+#: src/class-mixtape-admin.php:769
+msgid "<strong>mixtape</strong> must now be <a href=\"%s\">configured</a> before use."
 msgstr ""
 
-#: src/class-mistape-admin.php:788
-msgid "<strong>Mistape</strong> settings notice will be dismissed after saving changes."
+#: src/class-mixtape-admin.php:764
+msgid "<strong>mixtape</strong> settings notice will be dismissed after saving changes."
 msgstr ""
 
-#: src/class-mistape-admin.php:852
+#: src/class-mixtape-admin.php:825
 msgid "Optional shortcode parameters are:"
 msgstr ""
 
-#: src/class-mistape-admin.php:854
+#: src/class-mixtape-admin.php:827
 msgid "can be 'text' or 'image'"
 msgstr ""
 
-#: src/class-mistape-admin.php:855
+#: src/class-mixtape-admin.php:828
 msgid "override default css class"
 msgstr ""
 
-#: src/class-mistape-admin.php:856
+#: src/class-mixtape-admin.php:829
 msgid "override caption text"
 msgstr ""
 
-#: src/class-mistape-admin.php:857
+#: src/class-mixtape-admin.php:830
 msgid "override image URL"
 msgstr ""
 
-#: src/class-mistape-admin.php:859
+#: src/class-mixtape-admin.php:832
 msgid "When no parameters specified, general configuration is used."
 msgstr ""
 
-#: src/class-mistape-admin.php:860
+#: src/class-mixtape-admin.php:833
 msgid "If image url is specified, format parameter can be omitted."
 msgstr ""
 
-#: src/class-mistape-admin.php:861
+#: src/class-mixtape-admin.php:834
 msgid "Shortcode usage example:"
 msgstr ""
 
-#: src/class-mistape-admin.php:867
+#: src/class-mixtape-admin.php:840
 msgid "PHP code example:"
 msgstr ""
 
-#: src/class-mistape-admin.php:877
+#: src/class-mixtape-admin.php:850
 msgid "Hooks"
 msgstr ""
 
-#: src/class-mistape-admin.php:883
+#: src/class-mixtape-admin.php:856
 msgid "Allows to modify caption text globally (preferred over HTML filter)."
 msgstr ""
 
-#: src/class-mistape-admin.php:891
+#: src/class-mixtape-admin.php:864
 msgid "Allows to modify the caption HTML before output."
 msgstr ""
 
-#: src/class-mistape-admin.php:899
+#: src/class-mixtape-admin.php:872
 msgid "Allows to modify modal dialog strings (preferred over HTML filter)."
 msgstr ""
 
-#: src/class-mistape-admin.php:907
+#: src/class-mixtape-admin.php:880
 msgid "Allows to modify the modal dialog HTML before output."
 msgstr ""
 
-#: src/class-mistape-admin.php:916
+#: src/class-mixtape-admin.php:889
 msgid "Allows to override email sending logic."
 msgstr ""
 
-#: src/class-mistape-admin.php:921
+#: src/class-mixtape-admin.php:894
 msgid "Allows to change email recipient."
 msgstr ""
 
-#: src/class-mistape-admin.php:926
+#: src/class-mixtape-admin.php:899
 msgid "Allows to change email subject."
 msgstr ""
 
-#: src/class-mistape-admin.php:931
+#: src/class-mixtape-admin.php:904
 msgid "Allows to modify email message to send."
 msgstr ""
 
-#: src/class-mistape-admin.php:936
+#: src/class-mixtape-admin.php:909
 msgid "Allows for custom reports handling. Refer to code for implementation details."
 msgstr ""
 
-#: src/class-mistape-admin.php:944
+#: src/class-mixtape-admin.php:917
 msgid "Allows to modify global options array during initialization."
 msgstr ""
 
-#: src/class-mistape-admin.php:952
-msgid "Allows to add custom logic for whether to output Mistape to front end or not."
+#: src/class-mixtape-admin.php:925
+msgid "Allows to add custom logic for whether to output Mixtape to front end or not."
 msgstr ""
 
-#: src/class-mistape-ajax.php:73, src/class-mistape-ajax.php:81, src/class-mistape-ajax.php:111
+#: src/class-mixtape-ajax.php:73, src/class-mixtape-ajax.php:81, src/class-mixtape-ajax.php:111
 msgid "Report not sent"
 msgstr ""
 
-#: src/class-mistape-ajax.php:74
+#: src/class-mixtape-ajax.php:74
 msgid "Spam protection: too many reports from your IP address."
 msgstr ""
 
-#: src/class-mistape-ajax.php:82
+#: src/class-mixtape-ajax.php:82
 msgid "No text selected."
 msgstr ""
 
-#: src/class-mistape-ajax.php:94
+#: src/class-mixtape-ajax.php:94
 msgid "Our editors already got notified about this error. Thanks for your care."
 msgstr ""
 
-#: src/class-mistape-ajax.php:112
+#: src/class-mixtape-ajax.php:112
 msgid "Email service returned an error while trying to deliver your report."
 msgstr ""
 
-#: src/class-mistape-ajax.php:193
+#: src/class-mixtape-ajax.php:193
 msgid "Reported from page:"
 msgstr ""
 
-#: src/class-mistape-ajax.php:194
+#: src/class-mixtape-ajax.php:194
 msgctxt "[Email] Reported from page: unknown"
 msgid "unknown"
 msgstr ""
 
-#: src/class-mistape-ajax.php:200
+#: src/class-mixtape-ajax.php:200
 msgid "Post edit URL:"
 msgstr ""
 
-#: src/class-mistape-ajax.php:206
+#: src/class-mixtape-ajax.php:206
 msgid "Reported by:"
 msgstr ""
 
-#: src/class-mistape-ajax.php:209
+#: src/class-mixtape-ajax.php:209
 msgid "Reported text"
 msgstr ""
 
-#: src/class-mistape-ajax.php:213
+#: src/class-mixtape-ajax.php:213
 msgid "Comment:"
 msgstr ""
 
-#: src/class-mistape-ajax.php:224
+#: src/class-mixtape-ajax.php:224
 msgid "Spelling error reported"
 msgstr ""

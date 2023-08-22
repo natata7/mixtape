@@ -1,22 +1,22 @@
 /* caption */
-.mistape_caption {
+.mixtape_caption {
 	font-size: 80%;
 	opacity: 0.8;
 }
 
-.mistape-link-wrap {
+.mixtape-link-wrap {
 	float: left;
 	margin-right: 6px;
 }
 
-.mistape-logo svg {
+.mixtape-logo svg {
 	display: block;
 	height: 22px;
 	width: 22px;
 	fill: #E42029;
 }
 
-.mistape-logo.spin {
+.mixtape-logo.spin {
 	animation-name: spin;
 	animation-duration: 1000ms;
 	animation-iteration-count: infinite;
@@ -31,27 +31,27 @@
 	-moz-animation-timing-function: linear;
 }
 
-.mistape_caption .mistape-link {
+.mixtape_caption .mixtape-link {
 	text-decoration: none !important;
 	border: none !important;
 	box-shadow: none !important;
 }
 
-.mistape-link:hover {
+.mixtape-link:hover {
 	text-decoration: none !important;
 	border: none !important;
 }
 
 /* common dialog styles */
-#mistape_dialog,
-#mistape_dialog .dialog__overlay {
+#mixtape_dialog,
+#mixtape_dialog .dialog__overlay {
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
 }
 
-#mistape_dialog {
+#mixtape_dialog {
 	position: fixed;
 	z-index: 2147483647;
 	display: none;
@@ -62,7 +62,7 @@
 	pointer-events: none;
 }
 
-#mistape_dialog .dialog__overlay {
+#mixtape_dialog .dialog__overlay {
 	position: absolute;
 	background: rgba(36, 36, 209, 0.4);
 	backdrop-filter: blur(5px);
@@ -72,12 +72,12 @@
 	-webkit-backface-visibility: hidden;
 }
 
-#mistape_dialog .dialog__content .dialog-wrap {
+#mixtape_dialog .dialog__content .dialog-wrap {
 	perspective: 800px;
 	transition: transform 0.5s;
 }
 
-#mistape_dialog .dialog__content .dialog-wrap .dialog-wrap-top {
+#mixtape_dialog .dialog__content .dialog-wrap .dialog-wrap-top {
 	transform-origin: 50% 100%;
 	transition: transform 0.5s;
 	position: relative;
@@ -87,7 +87,7 @@
 	-webkit-backface-visibility: hidden;
 }
 
-#mistape_dialog .dialog__content .dialog-wrap .dialog-wrap-top::after {
+#mixtape_dialog .dialog__content .dialog-wrap .dialog-wrap-top::after {
 	content: '';
 	width: 100%;
 	height: 100%;
@@ -101,7 +101,7 @@
 	-webkit-backface-visibility: hidden;
 }
 
-#mistape_dialog .dialog__content .dialog-wrap .dialog-wrap-bottom .comment {
+#mixtape_dialog .dialog__content .dialog-wrap .dialog-wrap-bottom .comment {
 	margin-top: 0;
 	padding-left: 0;
 	margin-left: auto;
@@ -109,7 +109,7 @@
 	width: 100%;
 }
 
-#mistape_dialog .dialog__content .dialog-wrap .dialog-wrap-bottom {
+#mixtape_dialog .dialog__content .dialog-wrap .dialog-wrap-bottom {
 	transition: background 0.4s;
 	transform: translate3d(0, 0, 0) translateZ(0);
 	backface-visibility: hidden;
@@ -117,7 +117,7 @@
 	margin-top: -1px;
 }
 
-#mistape_dialog .dialog__content {
+#mixtape_dialog .dialog__content {
 	width: 50%;
 	max-width: 560px;
 	min-width: 290px;
@@ -129,35 +129,35 @@
 	box-sizing: content-box;
 }
 
-#mistape_dialog.dialog--open .dialog__overlay {
+#mixtape_dialog.dialog--open .dialog__overlay {
 	opacity: 1;
 	pointer-events: auto;
 }
 
-#mistape_dialog.dialog--open .dialog__content {
+#mixtape_dialog.dialog--open .dialog__content {
 	pointer-events: auto;
 }
 
-#mistape_reported_text {
+#mixtape_reported_text {
 	padding: 5px 10px;
 	position: relative;
 	z-index: 0;
 	font-weight: normal;
 }
 
-#mistape_reported_text .mistape_mistake_outer {
+#mixtape_reported_text .mixtape_mistake_outer {
 	background-color: #F5F5F5;
 	color: #111;
 	font-weight: normal;
 	padding: 0 3px;
 }
 
-#mistape_reported_text .mistape_mistake_inner {
+#mixtape_reported_text .mixtape_mistake_inner {
 	color: #E42029;
 	font-weight: normal;
 }
 
-textarea#mistape_comment {
+textarea#mixtape_comment {
 	width: 100%;
 	resize: none;
 	font-size: 14px;
@@ -171,27 +171,27 @@ textarea#mistape_comment {
 	transition: border 0.3s, color 0.3s, background 0.4s;
 }
 
-textarea#mistape_comment:focus {
+textarea#mixtape_comment:focus {
 	background-color: #fff;
 	border-color: #949494;
 	color: #1a1a1a;
 	outline: 0;
 }
 
-#mistape_dialog .mistape_dialog_block {
+#mixtape_dialog .mixtape_dialog_block {
 	margin: 20px 0;
 }
 
-#mistape_dialog .mistape_dialog_btn_block{
+#mixtape_dialog .mixtape_dialog_btn_block {
 	display: flex;
 	margin: 20px 0;
 }
 
-#mistape_dialog .pos-relative {
+#mixtape_dialog .pos-relative {
 	position: relative;
 }
 
-#mistape_dialog .mistape_dialog_footer {
+#mixtape_dialog .mixtape_dialog_footer {
 	position: absolute;
 	right: 0;
 	bottom: -24px;
@@ -199,11 +199,11 @@ textarea#mistape_comment:focus {
 	color: #ddd;
 }
 
-#mistape_dialog .mistape_dialog_footer a {
+#mixtape_dialog .mixtape_dialog_footer a {
 	color: #ccc;
 }
 
-#mistape_dialog .mistape_action {
+#mixtape_dialog .mixtape_action {
 	display: inline-block;
 	cursor: pointer;
 	padding: 22px 25px;
@@ -220,12 +220,12 @@ textarea#mistape_comment:focus {
 	min-width: 150px;
 }
 
-#mistape_dialog .mistape_action:hover {
+#mixtape_dialog .mixtape_action:hover {
 	opacity: 0.9;
 	text-decoration: none;
 }
 
-#mistape_dialog h2 {
+#mixtape_dialog h2 {
 	margin: 0;
 	font-weight: 400;
 	font-size: 26px;
@@ -235,7 +235,7 @@ textarea#mistape_comment:focus {
 	text-transform: uppercase;
 }
 
-#mistape_dialog h3 {
+#mixtape_dialog h3 {
 	margin: 0;
 	font-weight: 300;
 	font-size: 14px;
@@ -244,16 +244,16 @@ textarea#mistape_comment:focus {
 	color: #BFBFBF;
 }
 
-#mistape_success_dialog .dialog-wrap {
+#mixtape_success_dialog .dialog-wrap {
 	background: #fff;
 	padding: 30px;
 }
 
-#mistape_success_dialog .dialog-wrap h3 {
+#mixtape_success_dialog .dialog-wrap h3 {
 	margin-top: 20px;
 }
 
-#mistape_dialog .mistape-close__btn{
+#mixtape_dialog .mixtape-close__btn {
 	width: 23px;
 	height: 23px;
 	position: absolute;
@@ -263,20 +263,20 @@ textarea#mistape_comment:focus {
 }
 
 /* Sandra animation effect */
-#mistape_dialog.dialog--open .dialog__content,
-#mistape_dialog.dialog--close .dialog__content {
+#mixtape_dialog.dialog--open .dialog__content,
+#mixtape_dialog.dialog--close .dialog__content {
 	-webkit-animation-duration: 0.3s;
 	animation-duration: 0.3s;
 	-webkit-animation-fill-mode: forwards;
 	animation-fill-mode: forwards;
 }
 
-#mistape_dialog.dialog--open .dialog__content {
+#mixtape_dialog.dialog--open .dialog__content {
 	-webkit-animation-name: anim-open;
 	animation-name: anim-open;
 }
 
-#mistape_dialog.dialog--close .dialog__content {
+#mixtape_dialog.dialog--close .dialog__content {
 	-webkit-animation-name: anim-close;
 	animation-name: anim-close;
 }
@@ -357,16 +357,16 @@ textarea#mistape_comment:focus {
 	}
 }
 
-/*Mistape Letter*/
+/*mixtape Letter*/
 
-.mistape-letter {
+.mixtape-letter {
 	width: 640px;
 	height: 400px;
 	top: calc(50% - 200px);
 	position: absolute;
 }
 
-.mistape-letter-front {
+.mixtape-letter-front {
 	width: 304px;
 	height: 190px;
 	/*background: url(../img/letter-front.svg) no-repeat;*/
@@ -383,7 +383,7 @@ textarea#mistape_comment:focus {
 	transition: transform 0.4s, opacity 0.15s;
 }
 
-.mistape-letter-front .front-left {
+.mixtape-letter-front .front-left {
 	width: 0;
 	height: 0;
 	border-left: 152px solid #E42029;
@@ -396,7 +396,7 @@ textarea#mistape_comment:focus {
 	left: 0;
 }
 
-.mistape-letter-front .front-right {
+.mixtape-letter-front .front-right {
 	width: 0;
 	height: 0;
 	border-right: 152px solid #E42029;
@@ -409,7 +409,7 @@ textarea#mistape_comment:focus {
 	right: 0;
 }
 
-.mistape-letter-front .front-right:before {
+.mixtape-letter-front .front-right:before {
 	content: '';
 	display: block;
 	width: 0;
@@ -423,7 +423,7 @@ textarea#mistape_comment:focus {
 	right: -152px;
 }
 
-.mistape-letter-front .front-bottom {
+.mixtape-letter-front .front-bottom {
 	width: 0;
 	height: 0;
 	border-bottom: 95px solid #E42029;
@@ -436,7 +436,7 @@ textarea#mistape_comment:focus {
 	left: 0;
 }
 
-.mistape-letter-front .front-bottom:before {
+.mixtape-letter-front .front-bottom:before {
 	content: '';
 	display: block;
 	width: 0;
@@ -450,7 +450,7 @@ textarea#mistape_comment:focus {
 	right: -152px;
 }
 
-.mistape-letter-back {
+.mixtape-letter-back {
 	width: 304px;
 	height: 190px;
 	/*background: url(../img/letter-back.svg) no-repeat;*/
@@ -468,7 +468,7 @@ textarea#mistape_comment:focus {
 	opacity: 0;
 }
 
-.mistape-letter-back:before {
+.mixtape-letter-back:before {
 	content: '';
 	display: block;
 	width: 100%;
@@ -479,7 +479,7 @@ textarea#mistape_comment:focus {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-.mistape-letter-back>.mistape-letter-back-top {
+.mixtape-letter-back>.mixtape-letter-back-top {
 	/*width: 304px;*/
 	/*height: 95px;*/
 	width: 0;
@@ -501,7 +501,7 @@ textarea#mistape_comment:focus {
 	transform: translateX(0) rotateX(-180deg);
 }
 
-.mistape-letter-back>.mistape-letter-back-top:before {
+.mixtape-letter-back>.mixtape-letter-back-top:before {
 	content: '';
 	display: block;
 	width: 0;
@@ -515,7 +515,7 @@ textarea#mistape_comment:focus {
 	left: -152px;
 }
 
-.mistape-letter-top {
+.mixtape-letter-top {
 	width: 0;
 	height: 0;
 	border-bottom: 95px solid #E42029;
@@ -532,7 +532,7 @@ textarea#mistape_comment:focus {
 	transform: rotateX(0deg);
 }
 
-.mistape-letter-top:before {
+.mixtape-letter-top:before {
 	content: '';
 	display: block;
 	width: 0;
@@ -546,59 +546,59 @@ textarea#mistape_comment:focus {
 	left: -152px;
 }
 
-.mistape-letter-top.close {
+.mixtape-letter-top.close {
 	transform: rotateX(-180deg);
 }
 
-#mistape_dialog .dialog__content .dialog-wrap {
+#mixtape_dialog .dialog__content .dialog-wrap {
 	z-index: 3;
 	position: relative;
 }
 
-#mistape_dialog .dialog__content.show-letter .mistape-letter-back,
-#mistape_dialog .dialog__content.show-letter .mistape-letter-front {
+#mixtape_dialog .dialog__content.show-letter .mixtape-letter-back,
+#mixtape_dialog .dialog__content.show-letter .mixtape-letter-front {
 	transform: scale(1) translateY(15%);
 	opacity: 1;
 }
 
-#mistape_dialog .dialog__content.show-letter .mistape-letter-back>.mistape-letter-back-top {
+#mixtape_dialog .dialog__content.show-letter .mixtape-letter-back>.mixtape-letter-back-top {
 	transform: rotateX(0deg);
 }
 
-#mistape_dialog .dialog__content.show-letter .dialog-wrap .dialog-wrap-top {
+#mixtape_dialog .dialog__content.show-letter .dialog-wrap .dialog-wrap-top {
 	transform: rotateX(-180deg);
 }
 
-#mistape_dialog .dialog__content.show-letter .dialog-wrap .dialog-wrap-bottom {
+#mixtape_dialog .dialog__content.show-letter .dialog-wrap .dialog-wrap-bottom {
 	background: #c1c1c1;
 }
 
-#mistape_dialog .dialog__content.show-letter .dialog-wrap .dialog-wrap-bottom textarea {
+#mixtape_dialog .dialog__content.show-letter .dialog-wrap .dialog-wrap-bottom textarea {
 	background: #c1c1c1;
 }
 
-#mistape_dialog .dialog__content.show-letter .dialog-wrap {
+#mixtape_dialog .dialog__content.show-letter .dialog-wrap {
 	transform: translateY(-150%);
 }
 
-#mistape_dialog .dialog__content.show-letter.with-comment .dialog-wrap {
+#mixtape_dialog .dialog__content.show-letter.with-comment .dialog-wrap {
 	transform: translateY(-50%);
 }
 
-#mistape_dialog .mistape_action[data-action="send"] {
+#mixtape_dialog .mixtape_action[data-action="send"] {
 	position: relative;
 	z-index: 8;
 	width: 100%;
 }
 
-#mistape_dialog .dialog__content.show-letter .mistape_action[data-action="send"] {
+#mixtape_dialog .dialog__content.show-letter .mixtape_action[data-action="send"] {
 	transition-delay: 0.3s;
 	transition: visibility 0.1s, opacity 0.1s;
 	visibility: hidden !important;
 	opacity: 0 !important;
 }
 
-.mistape_dialog_screen {
+.mixtape_dialog_screen {
 	background: white;
 	padding: 60px 40px;
 	width: 100%;

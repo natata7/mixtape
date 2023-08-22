@@ -297,11 +297,11 @@
 })(window);
 
 /**
- * Mistape
+ * mixtape
  */
 (function ($) {
   // return if no args passed from backend
-  if (!window.decoMistape) {
+  if (!window.mixtape) {
     return;
   }
 
@@ -311,31 +311,29 @@
       : event;
   };
 
-  window.decoMistape = $.extend(window.decoMistape, {
+  window.mixtape = $.extend(window.mixtape, {
     onReady: function () {
-      decoMistape.initDialogFx();
+      mixtape.initDialogFx();
 
-      var $dialog = $(decoMistape.dlg.el);
+      var $dialog = $(mixtape.dlg.el);
 
-      $(document).on("click", ".mistape_action", function () {
+      $(document).on("click", ".mixtape_action", function () {
         if ($(this).is("[data-action=send]")) {
           var data;
           if (!$dialog.data("dry-run") && (data = $dialog.data("report"))) {
             if ($dialog.data("mode") === "comment") {
-              data.comment = $dialog.find("#mistape_comment").val();
-              $("#mistape_comment").val("");
+              data.comment = $dialog.find("#mixtape_comment").val();
+              $("#mixtape_comment").val("");
             }
             data.post_id = $(this).data("id");
-            decoMistape.reportSpellError(data);
+            mixtape.reportSpellError(data);
           }
-          decoMistape.animateLetter();
-        } else if ($(this).is("[data-dialog-close]")) {
-          decoMistape.dlg.toggle();
+          mixtape.animateLetter();
         }
       });
 
-      $(document).on("click", "#mistape-close-btn", function () {
-        decoMistape.dlg.toggle();
+      $(document).on("click", "#mixtape-close-btn", function () {
+        mixtape.dlg.toggle();
       });
 
       $(document).keyup(function (ev) {
@@ -343,37 +341,37 @@
           ev.keyCode === 13 &&
           ev.ctrlKey &&
           ev.target.nodeName.toLowerCase() !== "textarea" &&
-          $("#mistape_dialog.dialog--open").length === 0
+          $("#mixtape_dialog.dialog--open").length === 0
         ) {
-          var report = decoMistape.getSelectionData();
+          var report = mixtape.getSelectionData();
           if (report) {
-            decoMistape.showDialog(report);
+            mixtape.showDialog(report);
           }
         }
       });
     },
 
     initDialogFx: function () {
-      decoMistape.dlg = new DialogFx(
-        document.getElementById("mistape_dialog"),
+      mixtape.dlg = new DialogFx(
+        document.getElementById("mixtape_dialog"),
         {
           onOpenDialog: function (dialog) {
             $(dialog.el).css("display", "flex");
           },
           onCloseAnimationEnd: function (dialog) {
             $(dialog.el).css("display", "none");
-            decoMistape.resetDialog();
+            mixtape.resetDialog();
           },
         }
       );
     },
 
     animateLetter: function () {
-      var dialog = $(decoMistape.dlg.el),
+      var dialog = $(mixtape.dlg.el),
         content = dialog.find(".dialog__content"),
-        letterTop = dialog.find(".mistape-letter-top"),
-        letterFront = dialog.find(".mistape-letter-front"),
-        letterBack = dialog.find(".mistape-letter-back"),
+        letterTop = dialog.find(".mixtape-letter-top"),
+        letterFront = dialog.find(".mixtape-letter-front"),
+        letterBack = dialog.find(".mixtape-letter-back"),
         dialogWrap = dialog.find(".dialog-wrap");
 
       content.addClass("show-letter");
@@ -387,7 +385,7 @@
           bottom: Math.floor(y),
           opacity: 1,
         });
-        jQuery(".mistape-letter-back-top").hide();
+        jQuery(".mixtape-letter-back-top").hide();
         if (content.hasClass("with-comment")) {
           dialogWrap.css("transform", "scaleY(0.5) scaleX(0.28)");
         } else {
@@ -417,7 +415,7 @@
               letterBack.css("animation", "send-letter1 0.7s");
               letterTop.css("animation", "send-letter2 0.7s");
               setTimeout(function () {
-                decoMistape.dlg.toggle();
+                mixtape.dlg.toggle();
               }, 400);
             }, 400);
           }, 400);
@@ -430,43 +428,43 @@
         report.hasOwnProperty("selection") &&
         report.hasOwnProperty("context")
       ) {
-        var $dialog = $(decoMistape.dlg.el);
+        var $dialog = $(mixtape.dlg.el);
 
         if ($dialog.data("mode") === "notify") {
-          decoMistape.reportSpellError(report);
-          decoMistape.dlg.toggle();
+          mixtape.reportSpellError(report);
+          mixtape.dlg.toggle();
         } else {
           $dialog.data("report", report);
-          $dialog.find("#mistape_reported_text").html(report.preview_text);
-          decoMistape.dlg.toggle();
+          $dialog.find("#mixtape_reported_text").html(report.preview_text);
+          mixtape.dlg.toggle();
         }
       }
     },
 
     resetDialog: function () {
-      var $dialog = $(decoMistape.dlg.el);
+      var $dialog = $(mixtape.dlg.el);
 
       if ($dialog.data("mode") != "notify") {
-        $dialog.find("#mistape_confirm_dialog").css("display", "");
-        $dialog.find("#mistape_success_dialog").remove();
+        $dialog.find("#mixtape_confirm_dialog").css("display", "");
+        $dialog.find("#mixtape_success_dialog").remove();
       }
 
       // letter
       $dialog.find(".dialog__content").removeClass("show-letter");
       $dialog
         .find(
-          ".mistape-letter-top, .mistape-letter-front, .mistape-letter-back, .dialog-wrap, .mistape-letter-back-top"
+          ".mixtape-letter-top, .mixtape-letter-front, .mixtape-letter-back, .dialog-wrap, .mixtape-letter-back-top"
         )
         .removeAttr("style");
-      $dialog.find(".mistape-letter-top").removeClass("close");
+      $dialog.find(".mixtape-letter-top").removeClass("close");
     },
 
     reportSpellError: function (data) {
-      data.action = "mistape_report_error";
+      data.action = "mixtape_report_error";
       $.ajax({
         type: "post",
         dataType: "json",
-        url: decoMistape.ajaxurl,
+        url: mixtape.ajaxurl,
         data: data,
       });
     },
@@ -494,10 +492,10 @@
 
       var isSubstrUnique = function (substr, context) {
         if (typeof context === "undefined") {
-          context = decoMistape.contextBuffer;
+          context = mixtape.contextBuffer;
         }
         if (typeof substr === "undefined") {
-          substr = decoMistape.selBuffer;
+          substr = mixtape.selBuffer;
         }
         var split = context.split(substr);
         var count = split.length - 1;
@@ -854,8 +852,8 @@
           var scope = { selection: "word", context: "initial" };
           var context = stringifyContent(contextsToCheck[method].trim());
           var selWithContext = stringifyContent(sel.toString().trim());
-          decoMistape.contextBuffer = context;
-          decoMistape.selBuffer = selWithContext;
+          mixtape.contextBuffer = context;
+          mixtape.selBuffer = selWithContext;
           var selPos; // this is what we are going to find
           var selExactMatch = false;
 
@@ -928,7 +926,7 @@
       if (selToFindInContext) {
         sel.removeAllRanges();
       } else {
-        decoMistape.restoreInitSelection(sel, initialSel);
+        mixtape.restoreInitSelection(sel, initialSel);
         return;
       }
 
@@ -1001,18 +999,18 @@
       if (isSubstrUnique(selChars, textToHighlight)) {
         highlightedChars = textToHighlight.replace(
           selChars,
-          '<span class="mistape_mistake_inner">' + selChars + "</span>"
+          '<span class="mixtape_mistake_inner">' + selChars + "</span>"
         );
       } else {
         highlightedChars =
-          '<strong class="mistape_mistake_inner">' +
+          '<strong class="mixtape_mistake_inner">' +
           textToHighlight +
           "</strong>";
       }
 
       var selWithContextHighlighted = selToFindInContext.replace(
         textToHighlight,
-        '<span class="mistape_mistake_outer">' + highlightedChars + "</span>"
+        '<span class="mixtape_mistake_outer">' + highlightedChars + "</span>"
       );
 
       if (selExactMatch && truncatedContext === context) {
@@ -1033,7 +1031,7 @@
         replace_context: selToFindInContext,
         context: truncatedContext,
         preview_text: previewText,
-        // post_id: decoMistape.getPostId()
+        // post_id: mixtape.getPostId()
       };
     },
 
@@ -1043,5 +1041,5 @@
     },
   });
 
-  $(document).ready(decoMistape.onReady);
+  $(document).ready(mixtape.onReady);
 })(jQuery);
