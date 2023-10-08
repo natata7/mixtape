@@ -1,9 +1,7 @@
 <?php
-// phpcs:disable WordPress.Security.NonceVerification.Missing
-// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
 /**
- * [Description Mixtape_Admin]
+ * [Mixtape_Admin]
  */
 class Mixtape_Admin extends Mixtape_Abstract {
 
@@ -122,6 +120,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		$table_name    = $wpdb->base_prefix . Mixtape_Abstract::DB_TABLE;
 		$reports_count = 0;
 
+		$nonce = wp_create_nonce( 'mixtape-admin-nonce' );
+
 		$table_exists  = ! ! $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM information_schema.tables
@@ -160,7 +160,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 				'<div id="mixtape-configuration" class="mixtape-tab-contents" %s>',
 				'configuration' == $active_tab ? '' : 'style="display: none;"'
 			); ?>
-			<form action="<?php esc_url_raw( admin_url( 'options.php' ) ); ?>" method="post">
+			<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>?_wpnonce=<?php esc_html( $nonce ); ?>" method="post">
 				<?php
 				settings_fields( 'mixtape_options' );
 				do_settings_sections( 'mixtape_options' );
@@ -343,7 +343,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			</div>
 			<br>
 			<label><input id="mixtape_email_recipient-post_author_first" type="checkbox" name="mixtape_options[email_recipient][post_author_first]" value="1" ' . checked(
-			'yes',
+			1,
 			$this->options['email_recipient']['post_author_first'],
 			false
 		) . '/>' . esc_html__( 'If post ID is determined, notify post author instead', 'mixtape' ) . '</label>
@@ -554,14 +554,16 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			return $input;
 		}
 
-		if ( isset( $_POST['option_page'] ) && 'mixtape_options' == $_POST['option_page'] ) {
+		$nonce = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( $_REQUEST['_wpnonce'] ) : '';
+
+		if ( wp_verify_nonce( $nonce, 'mixtape-admin-nonce' ) && isset( $_POST['option_page'] ) && 'mixtape_options' == $_POST['option_page'] ) {
 
 			// mail recipient
 			$input['email_recipient']['type']              = sanitize_text_field(isset( $input['email_recipient']['type'] ) && in_array(
 				$input['email_recipient']['type'],
 				array_keys( $this->email_recipient_types )
 			) ? $input['email_recipient']['type'] : self::$defaults['email_recipient']['type']);
-			$input['email_recipient']['post_author_first'] = '1' === $input['email_recipient']['post_author_first'] ? 'yes' : 'no';
+			$input['email_recipient']['post_author_first'] = '1' === $input['email_recipient']['post_author_first'] ? 1 : 0;
 
 			if (
 				'admin' == $input['email_recipient']['type'] && isset( $input['email_recipient']['id']['admin'] ) && ( user_can(
@@ -805,7 +807,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			}
 			$html .= '</p>';
 			$html .= '</div>';
-			echo $html;
+			echo wp_kses_post( $html );
 		}
 	}
 
@@ -966,6 +968,6 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		$args = array(
 			'reported_text_preview' => 'Lorem <span class="mixtape_mistake_highlight">upsum</span> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 		);
-		echo $this->get_dialog_html( $args );
+		echo wp_kses_post( $this->get_dialog_html( $args ) );
 	}
 }

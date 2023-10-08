@@ -1,5 +1,5 @@
 <?php
-// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+
 /**
  * [Description Mixtape]
  */
@@ -185,7 +185,7 @@ class Mixtape extends Mixtape_Abstract {
 		// dialog output
 		$output = $this->get_dialog_html();
 
-		echo apply_filters( 'mixtape_dialog_output', $output, $this->options );
+		echo wp_kses_post( apply_filters( 'mixtape_dialog_output', $output, $this->options ) );
 	}
 
 	/**

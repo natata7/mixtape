@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Mixtape
  * Description: Mixtape allows visitors to effortlessly notify site staff about found spelling errors.
- * Version: 1.0.0
+ * Version: 1.0
  * License: MIT License
  * License URI: http://opensource.org/licenses/MIT
  * Text Domain: mixtape
