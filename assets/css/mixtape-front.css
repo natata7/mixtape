@@ -262,6 +262,31 @@ textarea#mixtape_comment:focus {
 	cursor: pointer;
 }
 
+#mixtape_dialog .mixtape-close__btn:before, 
+#mixtape_dialog .mixtape-close__btn:after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #000;
+    border-radius: 4px;
+}
+
+#mixtape_dialog .mixtape-close__btn:hover:after,
+#mixtape_dialog .mixtape-close__btn:hover:before {
+	background: var(--global--color-primary-hover, blue);
+}
+
+#mixtape_dialog .mixtape-close__btn:before {
+    transform: rotate(45deg);
+}
+
+#mixtape_dialog .mixtape-close__btn:after {
+	transform: rotate(-45deg);
+}
+
 /* Sandra animation effect */
 #mixtape_dialog.dialog--open .dialog__content,
 #mixtape_dialog.dialog--close .dialog__content {

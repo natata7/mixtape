@@ -244,12 +244,7 @@ abstract class Mixtape_Abstract {
 					<div class="mixtape-letter-back-top"></div>
 				</div>
 				<div class="mixtape-letter-top letter-part"></div>
-				<div id="mixtape-close-btn" class="mixtape-close__btn">
-					<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M-2.89679e-05 1.41421L19.7611 21.1753L22.6274 21.2132L2.8663 1.45212L-2.89679e-05 1.41421Z" fill="#00A2FF"/>
-					<path d="M1.41421 22.6274L21.1753 2.86632L21.2132 -6.40798e-06L1.45212 19.7611L1.41421 22.6274Z" fill="#00A2FF"/>
-					</svg>
-				</div>
+				<div id="mixtape-close-btn" class="mixtape-close__btn"></div>
 			</div>';
 		}
 
