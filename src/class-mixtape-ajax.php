@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable WordPress.Security.NonceVerification.Missing
 
 /**
  * [Description Mixtape_Ajax]
@@ -72,14 +71,21 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 	 */
 	public function init() {
 
+		// Verify nonce
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'mixtape_nonce' ) ) {
+			die( 'False' );
+		}
+
 		// sanitize $_POST
-		$this->request       = array(
-			'selection'       => ! empty( $_POST['selection'] ) ? stripslashes( sanitize_text_field( $_POST['selection'] ) ) : '',
-			'word'            => ! empty( $_POST['word'] ) ? stripslashes( sanitize_text_field( $_POST['word'] ) ) : '',
-			'context'         => ! empty( $_POST['context'] ) ? stripslashes( sanitize_text_field( $_POST['context'] ) ) : '',
-			'replace_context' => ! empty( $_POST['replace_context'] ) ? stripslashes( sanitize_text_field( $_POST['replace_context'] ) ) : '',
-			'comment'         => ! empty( $_POST['comment'] ) ? stripslashes( sanitize_text_field( $_POST['comment'] ) ) : '',
-		);
+		$this->request = array(
+            'selection'       => ! empty( $_POST['selection'] ) ? sanitize_text_field( wp_unslash( $_POST['selection'] ) ) : '',
+            'word'            => ! empty( $_POST['word'] ) ? sanitize_text_field( wp_unslash( $_POST['word'] ) ) : '',
+            'context'         => ! empty( $_POST['context'] ) ? sanitize_text_field( wp_unslash( $_POST['context'] ) ) : '',
+            'replace_context' => ! empty( $_POST['replace_context'] ) ? sanitize_text_field( wp_unslash( $_POST['replace_context'] ) ) : '',
+            'comment'         => ! empty( $_POST['comment'] ) ? sanitize_text_field( wp_unslash( $_POST['comment'] ) ) : '',
+            'nonce'           => ! empty( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '',
+        );
+
 		$this->reported_text = $this->get_reported_text();
 		$this->url           = wp_get_referer();
 		$this->post_id       = ! empty( $_POST['post_id'] ) && (int) $_POST['post_id'] > 0 ? (int) $_POST['post_id'] : url_to_postid( $this->url );
@@ -97,18 +103,22 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 		$this->init();
 
 		if ( ! $this->validate_ip() ) {
-			wp_send_json_error( array(
+			wp_send_json_error(
+                 array(
 				'title'   => __( 'Report not sent', 'mixtape' ),
 				'message' => __( 'Spam protection: too many reports from your IP address.', 'mixtape' ),
-			) );
+			)
+                );
 		}
 
 		// do not process reports without selection data
 		if ( ! $this->request['selection'] ) {
-			wp_send_json_error( array(
+			wp_send_json_error(
+                 array(
 				'title'   => __( 'Report not sent', 'mixtape' ),
 				'message' => __( 'No text selected.', 'mixtape' ),
-			) );
+			)
+                );
 		}
 
 		do_action( 'mixtape_process_report', $this );
@@ -117,10 +127,12 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 		if ( $this->is_report_unique( $db_data ) ) {
 			$this->record_report( $db_data );
 		} else {
-			wp_send_json_error( array(
+			wp_send_json_error(
+                 array(
 				'title'   => __( 'Thanks!', 'mixtape' ),
 				'message' => __( 'Our editors already got notified about this error. Thanks for your care.', 'mixtape' ),
-			) );
+			)
+                );
 		}
 
 		$stop = apply_filters( 'mixtape_custom_email_handling', false, $this );
@@ -132,29 +144,38 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 		$result = $this->send_email();
 
 		if ( $result ) {
-			wp_send_json_success( array(
+			wp_send_json_success(
+                 array(
 				'title'   => __( 'Thanks!', 'mixtape' ),
 				'message' => __( 'Our editors are notified.', 'mixtape' ),
-			) );
+			)
+                );
 		} else {
-			wp_send_json_error( array(
+			wp_send_json_error(
+                 array(
 				'title'   => __( 'Report not sent', 'mixtape' ),
 				'message' => __( 'Email service returned an error while trying to deliver your report.', 'mixtape' ),
-			) );
+			)
+                );
 		}
 	}
 
 	public function ajax_update_admin_dialog() {
-		if ( ! empty( $_POST['mode'] ) ) {
-			$args = array(
-				'mode'                  => sanitize_text_field( $_POST['mode'] ),
-				'reported_text_preview' => 'Lorem <span class="mixtape_mistake_highlight">upsum</span> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-			);
-			wp_send_json_success( $this->get_dialog_html( $args ) );
-		}
+        if ( ! empty( $_POST['mode'] ) ) {
 
-		wp_send_json_error();
-	}
+			if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'mixtape_options-options' ) ) {
+				die( 'False' );
+			}
+
+            $args = array(
+                'mode'                  => sanitize_text_field( wp_unslash( $_POST['mode'] ) ),
+                'reported_text_preview' => 'Lorem <span class="mixtape_mistake_highlight">upsum</span> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            );
+            wp_send_json_success( $this->get_dialog_html( $args ) );
+        }
+
+        wp_send_json_error();
+    }
 
 	/**
 	 * Get recipient email
@@ -204,7 +225,7 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 		* This part of original WP function is commented out
 		*
 		* if ( !current_user_can( 'edit_post', $post->ID ) )
-		*	return;
+		*   return;
 		*/
 
 		return apply_filters( 'get_edit_post_link', admin_url( sprintf( $post_type_object->_edit_link . $action, $post->ID ) ), $post->ID, $context );
@@ -276,7 +297,7 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 			'selection_context'         => $this->request['context'] != $this->request['replace_context'] ? $this->request['context'] : null,
 			'comment'                   => $this->request['comment'],
 			'url'                       => $this->url,
-			'agent'                     => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_textarea_field( $_SERVER['HTTP_USER_AGENT'] ) : null,
+			'agent'                     => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_textarea_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : null,
 		);
 	}
 
@@ -302,8 +323,10 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 				AND date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY)',
 				$table_name,
 				$data['url'],
-				$blog_id ),
-			ARRAY_A );
+				$blog_id
+                ),
+			ARRAY_A
+            );
 
 		foreach ( $existing as $existing_record ) {
 			$existing_record['selection_word'] = $existing_record['selection_word'] ? $existing_record['selection_word'] : $existing_record['selection'];
@@ -326,18 +349,19 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 
 	/**
 	 * Get current user IP Address.
+     *
 	 * @package: woocommerce
 	 * @return string
 	 */
 	public static function get_ip_address() {
 		if ( isset( $_SERVER['X-Real-IP'] ) ) {
-			return sanitize_text_field( $_SERVER['X-Real-IP'] );
+			return sanitize_text_field( wp_unslash( $_SERVER['X-Real-IP'] ) );
 		} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
 			// Proxy servers can send through this header like this: X-Forwarded-For: client1, proxy1, proxy2
 			// Make sure we always only send through the first IP in the list which should always be the client IP.
-			return trim( current( explode( ',', sanitize_text_field( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) ) );
+			return trim( current( explode( ',', sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) ) ) );
 		} elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
-			return sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+			return sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 		}
 
 		return null;
@@ -360,8 +384,11 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 			WHERE reporter_IP = %s and blog_id = %d 
 			AND date >= DATE_ADD(CURDATE(), INTERVAL -1 DAY) 
 			ORDER BY date DESC',
-			$this->reporter_ip, $blog_id ),
-			ARRAY_A );
+			$this->reporter_ip,
+                $blog_id
+                ),
+			ARRAY_A
+            );
 
 		// check total reports for past 24 hours
 		if ( count( $todays_reports ) > 30 ) {
@@ -375,9 +402,9 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 			$report_timestamp = strtotime( $report['date'] );
 			$seconds_passed   = current_time( 'timestamp' ) - $report_timestamp;
 			if ( $seconds_passed < 5 * MINUTE_IN_SECONDS ) {
-				$count_per_5_min ++;
+				$count_per_5_min++;
 			} elseif ( $seconds_passed < 30 * MINUTE_IN_SECONDS ) {
-				$count_per_30_min ++;
+				$count_per_30_min++;
 			} else {
 				break;
 			}
@@ -389,5 +416,4 @@ class Mixtape_Ajax extends Mixtape_Abstract {
 
 		return true;
 	}
-
 }

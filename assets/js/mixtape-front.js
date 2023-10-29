@@ -320,12 +320,14 @@
       $(document).on("click", ".mixtape_action", function () {
         if ($(this).is("[data-action=send]")) {
           var data;
+
           if (!$dialog.data("dry-run") && (data = $dialog.data("report"))) {
             if ($dialog.data("mode") === "comment") {
               data.comment = $dialog.find("#mixtape_comment").val();
               $("#mixtape_comment").val("");
             }
             data.post_id = $(this).data("id");
+            data.nonce = $dialog.data("nonce");
             mixtape.reportSpellError(data);
           }
           mixtape.animateLetter();
@@ -352,18 +354,15 @@
     },
 
     initDialogFx: function () {
-      mixtape.dlg = new DialogFx(
-        document.getElementById("mixtape_dialog"),
-        {
-          onOpenDialog: function (dialog) {
-            $(dialog.el).css("display", "flex");
-          },
-          onCloseAnimationEnd: function (dialog) {
-            $(dialog.el).css("display", "none");
-            mixtape.resetDialog();
-          },
-        }
-      );
+      mixtape.dlg = new DialogFx(document.getElementById("mixtape_dialog"), {
+        onOpenDialog: function (dialog) {
+          $(dialog.el).css("display", "flex");
+        },
+        onCloseAnimationEnd: function (dialog) {
+          $(dialog.el).css("display", "none");
+          mixtape.resetDialog();
+        },
+      });
     },
 
     animateLetter: function () {
@@ -1031,6 +1030,7 @@
         replace_context: selToFindInContext,
         context: truncatedContext,
         preview_text: previewText,
+        nonce: $('input[name="mixtape_nonce"]').val(),
         // post_id: mixtape.getPostId()
       };
     },

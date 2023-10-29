@@ -30,13 +30,8 @@
       });
 
       // caption format switch
-      $(
-        '#mixtape_register_shortcode, input[id^="mixtape_caption_format-"]'
-      ).change(function () {
-        if (
-          $("#mixtape_register_shortcode").is(":checked") ||
-          $('input[id^="mixtape_caption_format-"]:checked').val() === "image"
-        ) {
+      $('input[id^="mixtape_caption_format-"]').change(function () {
+        if ($('input[id^="mixtape_caption_format-"]:checked').val() === "image"){
           $("#mixtape_caption_image").slideDown("fast");
         } else {
           $("#mixtape_caption_image").slideUp("fast");
@@ -118,6 +113,7 @@
           url: mixtape.ajaxurl,
           data: {
             action: "mixtape_preview_dialog",
+            nonce: $('input[name="_wpnonce"]').val(),
             mode: mode,
           },
           success: function (response) {

@@ -96,8 +96,8 @@ abstract class Mixtape_Abstract {
 	 * Constructor
 	 */
 	protected function __construct() {
- 		if ( ! self::$abstract_constructed ) {
-			self::$plugin_path = dirname( dirname( __FILE__ ) ) . '/mixtape.php';
+		if ( ! self::$abstract_constructed ) {
+			self::$plugin_path = MIXTAPE__PLUGIN_DIR . '/mixtape.php';
 			// settings
 			$this->options = self::get_options();
 			self::load_filters();
@@ -112,32 +112,32 @@ abstract class Mixtape_Abstract {
 	}
 
 	public static function load_filters() {
- 		add_filter( 'mixtape_get_icon', __CLASS__ . '::icons_in_content', 10 );
+		add_filter( 'mixtape_get_icon', __CLASS__ . '::icons_in_content', 10 );
 	}
 
 	public static function get_options() {
- 		$options = get_option( 'mixtape_options', self::$defaults );
+		$options = get_option( 'mixtape_options', self::$defaults );
 		$options = is_array( $options ) ? $options : array();
 
 		return apply_filters( 'mixtape_options', array_merge( self::$defaults, $options ) );
 	}
 
 	public function get_caption_text() {
- 		if ( empty( $this->caption_text ) ) {
-			if ( 'custom' === $this->options['caption_text_mode'] && isset( $this->options['custom_caption_text'] ) ) {
-				$text = $this->options['custom_caption_text'];
-			} else {
-				$text = $this->get_default_caption_text();
-			}
+        if ( empty( $this->caption_text ) ) {
+            if ( 'custom' === $this->options['caption_text_mode'] && isset( $this->options['custom_caption_text'] ) ) {
+                $text = $this->options['custom_caption_text'];
+            } else {
+                $text = $this->get_default_caption_text();
+            }
 
-			$this->caption_text = apply_filters( 'mixtape_caption_text', $text );
-		}
+            $this->caption_text = apply_filters( 'mixtape_caption_text', $text );
+        }
 
-		return $this->caption_text;
-	}
+        return $this->caption_text;
+    }
 
 	public function get_default_caption_text() {
- 		if ( is_null( $this->default_caption_text ) ) {
+		if ( is_null( $this->default_caption_text ) ) {
 			$this->default_caption_text = __( 'If you have found a spelling error, please, notify us by selecting that text and pressing <em>Ctrl+Enter</em>.', 'mixtape' );
 		}
 
@@ -148,13 +148,12 @@ abstract class Mixtape_Abstract {
 	 * Load textdomain
 	 */
 	public function load_textdomain() {
- 		load_plugin_textdomain( 'mixtape', false, dirname( plugin_basename( self::$plugin_path ) ) . '/languages' );
-	}
+		load_plugin_textdomain( 'mixtape', false, MIXTAPE__PLUGIN_FOLDER . '/languages' );
+   }
 
 	/**
 	 * Mixtape dialog output
-	 *
-	 *
+     *
 	 * @return string
 	 */
 	public function get_dialog_html( $args = array() ) {
@@ -187,11 +186,11 @@ abstract class Mixtape_Abstract {
 
 		// Get real post_ID
 		$post_id = get_the_ID();
-
+		$nonce = wp_create_nonce( 'mixtape_nonce' );
 		// begin
 		$output = '';
 		if ( $args['wrap'] ) {
-			$output .= '<div id="mixtape_dialog" data-mode="' . esc_attr( $args['mode'] ) .
+			$output .= '<div id="mixtape_dialog" data-nonce="' . esc_attr( $nonce ) . '" data-mode="' . esc_attr( $args['mode'] ) .
 				'" data-dry-run="' . esc_attr( (string) $args['dry_run'] ) . '">
 			           <div class="dialog__overlay"></div><div class="dialog__content' .
 				( 'comment' !== $args['mode'] ? ' without-comment' : '' ) . '">';
@@ -205,7 +204,7 @@ abstract class Mixtape_Abstract {
 						 <h3>' . $args['message'] . '</h3>
 					</div>
 					<div class="mixtape_dialog_block">
-					   <a id="mixtape-close-btn" class="mixtape_action" data-dialog-close role="button">' . $args['close'] . '</a>
+						<a id="mixtape-close-btn" class="mixtape_action" data-dialog-close role="button">' . $args['close'] . '</a>
 					</div>
 				</div>';
 		} else {
@@ -278,9 +277,8 @@ abstract class Mixtape_Abstract {
 	}
 
 	public function is_ip_in_banlist( $ip ) {
-		$banlist = $this->get_ip_banlist();
-
-		if ( $banlist ) {
+		if ( $this->get_ip_banlist() ) {
+			$banlist = $this->get_ip_banlist();
 			if ( in_array( $ip, (array) $banlist ) ) {
 				return true;
 			}
@@ -290,7 +288,7 @@ abstract class Mixtape_Abstract {
 	}
 
 	public function get_ip_banlist() {
- 		if ( null === $this->ip_banlist ) {
+		if ( null === $this->ip_banlist ) {
 			$this->ip_banlist = get_option( self::IP_BANLIST_OPTION, array() );
 		}
 
@@ -298,7 +296,7 @@ abstract class Mixtape_Abstract {
 	}
 
 	public function enqueue_dialog_assets() {
- 		// style
+		// style
 		wp_enqueue_style( 'mixtape-front', plugins_url( 'assets/css/mixtape-front.css', self::$plugin_path ), array(), self::$version );
 
 		// modernizer
@@ -319,7 +317,7 @@ abstract class Mixtape_Abstract {
 	}
 
 	public static function create_db() {
- 		global $wpdb;
+		global $wpdb;
 
 		$wpdb->hide_errors();
 

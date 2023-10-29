@@ -7,6 +7,7 @@
  * License URI: http://opensource.org/licenses/MIT
  * Text Domain: mixtape
  * Domain Path: /languages
+ *
  * @package mixtape
  */
 

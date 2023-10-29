@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignore WordPress.WP.Capabilities.RoleFound
 
 /**
  * [Mixtape_Admin]
@@ -26,7 +27,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 
 		// if multisite inheritance is enabled, add corresponding action
-		if ( is_multisite() && 'yes' === $this->options['multisite_inheritance'] ) {
+		if ( 'yes' === $this->options['multisite_inheritance'] && is_multisite() ) {
 			add_action( 'wpmu_new_blog', __CLASS__ . '::activation' );
 		}
 
@@ -112,47 +113,46 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		global $wpdb;
 		$this->init();
 
-		// show changelog only if less than one week passed since updating the plugin
+		// Show changelog only if less than one week has passed since updating the plugin
 		$show_changelog = time() - (int) $this->options['plugin_updated_timestamp'] < WEEK_IN_SECONDS;
 
-		$active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'configuration';
+		$active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'configuration';
 
-		$table_name    = $wpdb->base_prefix . Mixtape_Abstract::DB_TABLE;
+		$table_name = $wpdb->base_prefix . Mixtape_Abstract::DB_TABLE;
 		$reports_count = 0;
 
-		$nonce = wp_create_nonce( 'mixtape-admin-nonce' );
-
-		$table_exists  = ! ! $wpdb->get_var(
+		$table_exists = ! ! $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(*) FROM information_schema.tables
-			WHERE table_schema =%s
-			AND table_name = '{$wpdb->base_prefix}mixtape_reports' LIMIT 1",
-				DB_NAME
+				'SELECT COUNT(*) FROM information_schema.tables
+				WHERE table_schema = %s
+				AND table_name = %s LIMIT 1',
+				DB_NAME,
+				$wpdb->base_prefix . 'mixtape_reports'
 			)
 		);
-		$blog_id       = get_current_blog_id();
+		$blog_id = get_current_blog_id();
 		$reports_count = $table_exists ? $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM {$wpdb->base_prefix}mixtape_reports where status = 'pending' && blog_id = %d",
 				$blog_id
 			)
 		) : null;
-?>
+		?>
 		<div class="wrap">
 			<h2>Mixtape</h2>
 			<h2 class="nav-tab-wrapper">
 				<?php
 				printf(
 					'<a href="%s" class="nav-tab%s" data-bodyid="mixtape-configuration" >%s</a>',
-					add_query_arg( 'tab', 'configuration' ),
+					esc_url( add_query_arg( 'tab', 'configuration' ) ),
 					'configuration' == $active_tab ? ' nav-tab-active' : '',
-					esc_html__( 'Configuration', 'mixtape' )
+					esc_html( __( 'Configuration', 'mixtape' ) )
 				);
 				printf(
 					'<a href="%s" class="nav-tab%s" data-bodyid="mixtape-help">%s</a>',
-					add_query_arg( 'tab', 'help' ),
+					esc_url( add_query_arg( 'tab', 'help' ) ),
 					'help' == $active_tab ? ' nav-tab-active' : '',
-					esc_html__( 'Help', 'mixtape' )
+					esc_html( __( 'Help', 'mixtape' ) )
 				);
 				?>
 			</h2>
@@ -160,10 +160,12 @@ class Mixtape_Admin extends Mixtape_Abstract {
 				'<div id="mixtape-configuration" class="mixtape-tab-contents" %s>',
 				'configuration' == $active_tab ? '' : 'style="display: none;"'
 			); ?>
-			<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>?_wpnonce=<?php esc_html( $nonce ); ?>" method="post">
+			<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>" method="post">
 				<?php
 				settings_fields( 'mixtape_options' );
 				do_settings_sections( 'mixtape_options' );
+				// echo '<input type="hidden" name="mixtape_nonce" value="' . esc_attr( $nonce ) . '">';
+
 				?>
 				<p class="submit">
 					<?php submit_button( '', 'primary', 'save_mixtape_options', false ); ?>
@@ -185,7 +187,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 					</div>
 				</div>
 			</form>
-
+	
 		</div>
 		<?php
 		printf(
@@ -197,7 +199,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		</div>
 		<div class="clear"></div>
 		</div>
-	<?php
+		<?php
 	}
 
 	/**
@@ -209,56 +211,56 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		add_settings_section( 'mixtape_configuration', '', array( $this, 'section_configuration' ), 'mixtape_options' );
 		add_settings_field(
 			'mixtape_email_recipient',
-			esc_html__( 'Email recipient', 'mixtape' ),
+			__( 'Email recipient', 'mixtape' ),
 			array( $this, 'field_email_recipient' ),
 			'mixtape_options',
 			'mixtape_configuration'
 		);
 		add_settings_field(
 			'mixtape_post_types',
-			esc_html__( 'Post types', 'mixtape' ),
+			__( 'Post types', 'mixtape' ),
 			array( $this, 'field_post_types' ),
 			'mixtape_options',
 			'mixtape_configuration'
 		);
 		add_settings_field(
 			'mixtape_register_shortcode',
-			esc_html__( 'Shortcodes', 'mixtape' ),
+			__( 'Shortcodes', 'mixtape' ),
 			array( $this, 'field_register_shortcode' ),
 			'mixtape_options',
 			'mixtape_configuration'
 		);
 		add_settings_field(
 			'mixtape_caption_format',
-			esc_html__( 'Caption format', 'mixtape' ),
+			__( 'Caption format', 'mixtape' ),
 			array( $this, 'field_caption_format' ),
 			'mixtape_options',
 			'mixtape_configuration'
 		);
 		add_settings_field(
 			'mixtape_caption_text_mode',
-			esc_html__( 'Caption text mode', 'mixtape' ),
+			__( 'Caption text mode', 'mixtape' ),
 			array( $this, 'field_caption_text_mode' ),
 			'mixtape_options',
 			'mixtape_configuration'
 		);
 		add_settings_field(
 			'mixtape_show_logo_in_caption',
-			esc_html__( 'Icon before the caption text', 'mixtape' ),
+			__( 'Icon before the caption text', 'mixtape' ),
 			array( $this, 'field_show_logo_in_caption' ),
 			'mixtape_options',
 			'mixtape_configuration'
 		);
 		add_settings_field(
 			'mixtape_color_scheme',
-			esc_html__( 'Color scheme', 'mixtape' ),
+			__( 'Color scheme', 'mixtape' ),
 			array( $this, 'field_show_color_scheme' ),
 			'mixtape_options',
 			'mixtape_configuration'
 		);
 		add_settings_field(
 			'mixtape_dialog_mode',
-			esc_html__( 'Dialog mode', 'mixtape' ),
+			__( 'Dialog mode', 'mixtape' ),
 			array( $this, 'field_dialog_mode' ),
 			'mixtape_options',
 			'mixtape_configuration'
@@ -267,7 +269,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		if ( is_multisite() && is_main_site() ) {
 			add_settings_field(
 				'mixtape_multisite_inheritance',
-				esc_html__( 'Multisite inheritance', 'mixtape' ),
+				__( 'Multisite inheritance', 'mixtape' ),
 				array( $this, 'field_multisite_inheritance' ),
 				'mixtape_options',
 				'mixtape_configuration'
@@ -343,7 +345,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			</div>
 			<br>
 			<label><input id="mixtape_email_recipient-post_author_first" type="checkbox" name="mixtape_options[email_recipient][post_author_first]" value="1" ' . checked(
-			1,
+			'yes',
 			$this->options['email_recipient']['post_author_first'],
 			false
 		) . '/>' . esc_html__( 'If post ID is determined, notify post author instead', 'mixtape' ) . '</label>
@@ -382,7 +384,9 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			$this->options['register_shortcode'],
 			false
 		) . '/>' . esc_html__(
-			'Register ', 'mixtape') . '<code>[mixtape]</code>' . esc_html__( ' shortcode.', 'mixtape' ) . '</label>
+			'Register ',
+            'mixtape'
+            ) . '<code>[mixtape]</code>' . esc_html__( ' shortcode.', 'mixtape' ) . '</label>
 			<p class="description">' . esc_html__( 'Enable if manual caption insertion via shortcodes is needed.', 'mixtape' ) . '</p>
 			<p class="description">' . esc_html__( 'Usage examples are in Help section.', 'mixtape' ) . '</p>
 			<p class="description">' . esc_html__( 'When enabled, Mixtape Ctrl+Enter listener works on all pages, not only on enabled post types.', 'mixtape' ) . '</p>
@@ -449,48 +453,54 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			<label class="select-logo__item select-logo__item--no-img">
 			    <input type="radio" name="mixtape_options[show_logo_in_caption]" value="0" ' . checked( 0, $custom_logo_icon, false ) . '>
 			    <div class="select-logo__img">
-			        ' . esc_html__( 'no icon', 'mixtape' ) . '
+				' . esc_html__( 'no icon', 'mixtape' ) . '
 			    </div>
 			</label>
 
 			<label class="select-logo__item">
 		    <input type="radio" name="mixtape_options[show_logo_in_caption]" value="1" ' . checked( 1, $custom_logo_icon, false ) . '>
-			    <div class="select-logo__img">
-                    ' . wp_kses($mixtape_icons[1], [
-							'svg'     => [
-								'view-box' => [],
-								'height' => [],
-								'width' => [],
-								'enable-background' => [],
-								'viewbox' => [],
-							],
-							'g' => [],
-							'path' => [
-								'd' => [],
-							],
-						]) . '
-			    </div>
+			<div class="select-logo__img">
+			' . wp_kses(
+                $mixtape_icons[1],
+                array(
+					'svg'     => array(
+						'view-box' => array(),
+						'height' => array(),
+						'width' => array(),
+						'enable-background' => array(),
+						'viewbox' => array(),
+					),
+					'g' => array(),
+					'path' => array(
+						'd' => array(),
+					),
+				)
+                ) . '
+		</div>
 			</label>
 
 			<label class="select-logo__item">
-	    <input type="radio" name="mixtape_options[show_logo_in_caption]" value="2" ' . checked( 2, $custom_logo_icon, false ) . '>
-			    <div class="select-logo__img">
-                ' . wp_kses($mixtape_icons[2], [
-					'svg'     => [
-						'view-box' => [],
-						'height' => [],
-						'width' => [],
-						'enable-background' => [],
-						'viewbox' => [],
-					],
-					'g' => [],
-					'path' => [
-						'd' => [],
-					],
-				]) . '
-			    </div>
-			</label>
-		</fieldset>';
+		<input type="radio" name="mixtape_options[show_logo_in_caption]" value="2" ' . checked( 2, $custom_logo_icon, false ) . '>
+			<div class="select-logo__img">
+			' . wp_kses(
+            $mixtape_icons[2],
+            array(
+				'svg'     => array(
+					'view-box' => array(),
+					'height' => array(),
+					'width' => array(),
+					'enable-background' => array(),
+					'viewbox' => array(),
+				),
+				'g' => array(),
+				'path' => array(
+					'd' => array(),
+				),
+			)
+            ) . '
+			</div>
+		</label>
+	</fieldset>';
 	}
 
 	/**
@@ -554,28 +564,31 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			return $input;
 		}
 
-		$nonce = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( $_REQUEST['_wpnonce'] ) : '';
+		if ( isset( $_POST['option_page'] ) &&
+			'mixtape_options' === $_POST['option_page'] ) {
 
-		if ( wp_verify_nonce( $nonce, 'mixtape-admin-nonce' ) && isset( $_POST['option_page'] ) && 'mixtape_options' == $_POST['option_page'] ) {
+			check_admin_referer( 'mixtape_options-options' );
 
 			// mail recipient
-			$input['email_recipient']['type']              = sanitize_text_field(isset( $input['email_recipient']['type'] ) && in_array(
+			$input['email_recipient']['type']              = sanitize_text_field(
+                isset( $input['email_recipient']['type'] ) && in_array(
 				$input['email_recipient']['type'],
 				array_keys( $this->email_recipient_types )
-			) ? $input['email_recipient']['type'] : self::$defaults['email_recipient']['type']);
-			$input['email_recipient']['post_author_first'] = '1' === $input['email_recipient']['post_author_first'] ? 1 : 0;
+			) ? $input['email_recipient']['type'] : self::$defaults['email_recipient']['type']
+                );
+			$input['email_recipient']['post_author_first'] = '1' === $input['email_recipient']['post_author_first'] ? 'yes' : 'no';
 
 			if (
 				'admin' == $input['email_recipient']['type'] && isset( $input['email_recipient']['id']['admin'] ) && ( user_can(
 					$input['email_recipient']['id']['admin'],
-					'administrator'
+					'administrator' // phpcs:ignore WordPress.WP.Capabilities.RoleFound
 				) )
 			) {
 				$input['email_recipient']['id'] = $input['email_recipient']['id']['admin'];
 			} elseif (
 				'editor' == $input['email_recipient']['type'] && isset( $input['email_recipient']['id']['editor'] ) && ( user_can(
 					$input['email_recipient']['id']['editor'],
-					'editor'
+					'editor' // phpcs:ignore WordPress.WP.Capabilities.RoleFound
 				) )
 			) {
 				$input['email_recipient']['id'] = $input['email_recipient']['id']['editor'];
@@ -618,10 +631,12 @@ class Mixtape_Admin extends Mixtape_Abstract {
 			}
 
 			// post types
-			$input['post_types'] = isset( $input['post_types'] ) && is_array( $input['post_types'] ) && count(array_intersect(
+			$input['post_types'] = isset( $input['post_types'] ) && is_array( $input['post_types'] ) && count(
+                array_intersect(
 				array_keys( $input['post_types'] ),
 				array_keys( $this->post_types )
-			)) === count( $input['post_types'] ) ? array_keys( $input['post_types'] ) : array();
+			)
+                ) === count( $input['post_types'] ) ? array_keys( $input['post_types'] ) : array();
 
 			// shortcode option
 			$input['register_shortcode'] = (bool) isset( $input['register_shortcode'] ) ? 'yes' : 'no';
@@ -666,8 +681,7 @@ class Mixtape_Admin extends Mixtape_Abstract {
 
 	/**
 	 * Add links to settings page
-	 *
-	 *
+     *
 	 * @return mixed
 	 */
 	public function plugins_page_settings_link( $links, $file ) {
@@ -776,13 +790,19 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		$this->enqueue_dialog_assets();
 
 		// admin page script
-		wp_enqueue_script('mixtape-admin', MIXTAPE__PLUGIN_URL . '/assets/js/admin.js', array(
+		wp_enqueue_script(
+            'mixtape-admin',
+            MIXTAPE__PLUGIN_URL . '/assets/js/admin.js',
+            array(
 			'mixtape-front',
 			'wp-color-picker',
-		), self::$version, true);
+		),
+            self::$version,
+            true
+            );
 
 		// admin page style
-		wp_register_style( 'mixtape_admin_style', MIXTAPE__PLUGIN_URL . '/assets/css/mixtape-admin.css', [], MIXTAPE__VERSION );
+		wp_register_style( 'mixtape_admin_style', MIXTAPE__PLUGIN_URL . '/assets/css/mixtape-admin.css', array(), MIXTAPE__VERSION );
 		wp_enqueue_style( 'mixtape_admin_style' );
 	}
 
@@ -794,16 +814,19 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		if ( 'yes' == $this->options['first_run'] && current_user_can( 'manage_options' ) ) {
 			$html = '<div class="updated">';
 			$html .= '<p>';
-			if ( 'settings_page_mixtape' == $wp_screen && $wp_screen->id ) {
+			if ( $wp_screen && 'settings_page_mixtape' == $wp_screen->id ) {
 				$html .= __(
 					'<strong>Mixtape</strong> settings notice will be dismissed after saving changes.',
 					'mixtape'
 				);
 			} else {
-				$html .= sprintf(__(
+				$html .= sprintf(
+                    __(
 					'<strong>Mixtape</strong> must now be <a href="%s">configured</a> before use.',
 					'mixtape'
-				), admin_url( 'options-general.php?page=mixtape_settings' ));
+				),
+                    admin_url( 'options-general.php?page=mixtape_settings' )
+                    );
 			}
 			$html .= '</p>';
 			$html .= '</div>';
@@ -817,7 +840,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 	 * @return array
 	 */
 	public function get_user_list_by_role( $role ) {
-		$users_query = get_users(array(
+		$users_query = get_users(
+            array(
 			'role'    => $role,
 			'fields'  => array(
 				'ID',
@@ -825,7 +849,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 				'user_email',
 			),
 			'orderby' => 'display_name',
-		));
+		)
+            );
 
 		return $users_query;
 	}
@@ -850,25 +875,26 @@ class Mixtape_Admin extends Mixtape_Abstract {
 	/**
 	 * Echo Help tab contents
 	 */
-	private static function print_help_page() { 	?>
+	private static function print_help_page() {
+     ?>
 		<div class="card">
-			<h3><?php esc_html_e( 'Shortcodes', 'mixtape' ) ?></h3>
-			<h4><?php esc_html_e( 'Optional shortcode parameters are:', 'mixtape' ) ?></h4>
+			<h3><?php esc_html_e( 'Shortcodes', 'mixtape' ); ?></h3>
+			<h4><?php esc_html_e( 'Optional shortcode parameters are:', 'mixtape' ); ?></h4>
 			<ul>
-				<li><code>'format', </code> — <?php esc_html_e( "can be 'text' or 'image'", 'mixtape' ) ?></li>
-				<li><code>'class', </code> — <?php esc_html_e( 'override default css class', 'mixtape' ) ?></li>
-				<li><code>'text', </code> — <?php esc_html_e( 'override caption text', 'mixtape' ) ?></li>
-				<li><code>'image', </code> — <?php esc_html_e( 'override image URL', 'mixtape' ) ?></li>
+				<li><code>'format', </code> — <?php esc_html_e( "can be 'text' or 'image'", 'mixtape' ); ?></li>
+				<li><code>'class', </code> — <?php esc_html_e( 'override default css class', 'mixtape' ); ?></li>
+				<li><code>'text', </code> — <?php esc_html_e( 'override caption text', 'mixtape' ); ?></li>
+				<li><code>'image', </code> — <?php esc_html_e( 'override image URL', 'mixtape' ); ?></li>
 			</ul>
-			<p><?php esc_html_e( 'When no parameters specified, general configuration is used.', 'mixtape' ) ?><br>
-				<?php esc_html_e( 'If image url is specified, format parameter can be omitted.', 'mixtape' ) ?></p>
-			<h4><?php esc_html_e( 'Shortcode usage example:', 'mixtape' ) ?></h4>
+			<p><?php esc_html_e( 'When no parameters specified, general configuration is used.', 'mixtape' ); ?><br>
+				<?php esc_html_e( 'If image url is specified, format parameter can be omitted.', 'mixtape' ); ?></p>
+			<h4><?php esc_html_e( 'Shortcode usage example:', 'mixtape' ); ?></h4>
 			<ul>
 				<li>
 					<p><code>[mixtape format="text" class="mixtape_caption_sidebar"]</code></p>
 				</li>
 			</ul>
-			<h4><?php esc_html_e( 'PHP code example:', 'mixtape' ) ?></h4>
+			<h4><?php esc_html_e( 'PHP code example:', 'mixtape' ); ?></h4>
 			<ul>
 				<li>
 					<p><code>&lt;?php do_shortcode( '[mixtape format="image" class="mixtape_caption_footer"
@@ -878,13 +904,14 @@ class Mixtape_Admin extends Mixtape_Abstract {
 		</div>
 
 		<div class="card">
-			<h3><?php esc_html_e( 'Hooks', 'mixtape' ) ?></h3>
+			<h3><?php esc_html_e( 'Hooks', 'mixtape' ); ?></h3>
 
 			<ul>
 
-				<li class="mixtape-hook-block">
+			<li class="mixtape-hook-block">
 					<code>'mixtape_caption_text', <span class="mixtape-var-str">$text</span></code>
-					<p class="description"><?php esc_html_e(
+					<p class="description">
+                    <?php esc_html_e(
 												'Allows to modify caption text globally (preferred over HTML filter).',
 												'mixtape'
 											) ?></p>
@@ -892,7 +919,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_caption_output', <span class="mixtape-var-str">$html</span>, <span class="mixtape-var-arr">$options</span></code></code>
-					<p class="description"><?php esc_html_e(
+					<p class="description">
+                    <?php esc_html_e(
 												'Allows to modify the caption HTML before output.',
 												'mixtape'
 											) ?></p>
@@ -900,7 +928,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_dialog_args', <span class="mixtape-var-arr">$args</span></code>
-					<p class="description"><?php esc_html_e(
+					<p class="description">
+                    <?php esc_html_e(
 												'Allows to modify modal dialog strings (preferred over HTML filter).',
 												'mixtape'
 											) ?></p>
@@ -908,7 +937,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_dialog_output', <span class="mixtape-var-str">$html</span>, <span class="mixtape-var-arr">$options</span></code></code>
-					<p class="description"><?php esc_html_e(
+					<p class="description">
+                    <?php esc_html_e(
 												'Allows to modify the modal dialog HTML before output.',
 												'mixtape'
 											) ?></p>
@@ -917,27 +947,28 @@ class Mixtape_Admin extends Mixtape_Abstract {
 				<li class="mixtape-hook-block">
 					<code>'mixtape_custom_email_handling', <span class="mixtape-var-bool">$stop</span>,
 						<span class="mixtape-var-obj">$mixtape_object</span></code>
-					<p class="description"><?php esc_html_e( 'Allows to override email sending logic.', 'mixtape' ) ?></p>
+					<p class="description"><?php esc_html_e( 'Allows to override email sending logic.', 'mixtape' ); ?></p>
 				</li>
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_mail_recipient', <span class="mixtape-var-str">$recipient</span>, <span class="mixtape-var-str">$url</span>, <span class="mixtape-var-obj">$user</span></code>
-					<p class="description"><?php esc_html_e( 'Allows to change email recipient.', 'mixtape' ) ?></p>
+					<p class="description"><?php esc_html_e( 'Allows to change email recipient.', 'mixtape' ); ?></p>
 				</li>
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_mail_subject', <span class="mixtape-var-str">$subject</span>, <span class="mixtape-var-str">$referrer</span>, <span class="mixtape-var-obj">$user</span></code>
-					<p class="description"><?php esc_html_e( 'Allows to change email subject.', 'mixtape' ) ?></p>
+					<p class="description"><?php esc_html_e( 'Allows to change email subject.', 'mixtape' ); ?></p>
 				</li>
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_mail_message', <span class="mixtape-var-str">$message</span>, <span class="mixtape-var-str">$referrer</span>, <span class="mixtape-var-obj">$user</span></code>
-					<p class="description"><?php esc_html_e( 'Allows to modify email message to send.', 'mixtape' ) ?></p>
+					<p class="description"><?php esc_html_e( 'Allows to modify email message to send.', 'mixtape' ); ?></p>
 				</li>
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_custom_email_handling', <span class="mixtape-var-bool">$stop</span>, <span class="mixtape-var-obj">$ajax_obj</span></code>
-					<p class="description"><?php esc_html_e(
+					<p class="description">
+                    <?php esc_html_e(
 												'Allows for custom reports handling. Refer to code for implementation details.',
 												'mixtape'
 											) ?></p>
@@ -945,7 +976,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_options', <span class="mixtape-var-arr">$options</span></code>
-					<p class="description"><?php esc_html_e(
+					<p class="description">
+                    <?php esc_html_e(
 												'Allows to modify global options array during initialization.',
 												'mixtape'
 											) ?></p>
@@ -953,7 +985,8 @@ class Mixtape_Admin extends Mixtape_Abstract {
 
 				<li class="mixtape-hook-block">
 					<code>'mixtape_is_appropriate_post', <span class="mixtape-var-bool">$result</span></code>
-					<p class="description"><?php esc_html_e(
+					<p class="description">
+                    <?php esc_html_e(
 												'Allows to add custom logic for whether to output Mixtape to front end or not.',
 												'mixtape'
 											) ?></p>

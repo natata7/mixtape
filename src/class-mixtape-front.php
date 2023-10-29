@@ -92,12 +92,13 @@ class Mixtape extends Mixtape_Abstract {
 	 * Load scripts and styles - frontend
 	 */
 	public function front_load_scripts_styles() {
+		global $post;
 
-		if ( ! $this->is_appropriate_post() && 'yes' !== $this->options['register_shortcode'] ) {
+		if ( ! $this->is_appropriate_post() && 'yes' !== $this->options['register_shortcode'] && ! has_shortcode( $post->post_content, 'mixtape' ) ) {
 			return;
+		} else {
+			$this->enqueue_dialog_assets();
 		}
-
-		$this->enqueue_dialog_assets();
 	}
 
 	/**
@@ -213,10 +214,11 @@ class Mixtape extends Mixtape_Abstract {
 				$result = true;
 			}
 
-			$this->is_appropriate_post = apply_filters( 'mixtape_is_appropriate_post', $result );
+			// $this->is_appropriate_post = apply_filters( 'mixtape_is_appropriate_post', $result );
+
 		}
 
-		return $this->is_appropriate_post;
+		return $result;
 	}
 
 
@@ -240,13 +242,13 @@ class Mixtape extends Mixtape_Abstract {
 
 		if ( empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
 			$is_mobile = false;
-		} elseif ( strpos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'Mobile' ) !== false // many mobile devices (all iPhone, iPad, etc.)
-		           || strpos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'Android' ) !== false
-		           || strpos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'Silk/' ) !== false
-		           || strpos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'Kindle' ) !== false
-		           || strpos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'BlackBerry' ) !== false
-		           || strpos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'Opera Mini' ) !== false
-		           || strpos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'Opera Mobi' ) !== false
+		} elseif ( strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 'Mobile' ) !== false // many mobile devices (all iPhone, iPad, etc.)
+		           || strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 'Android' ) !== false
+		           || strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 'Silk/' ) !== false
+		           || strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 'Kindle' ) !== false
+		           || strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 'BlackBerry' ) !== false
+		           || strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 'Opera Mini' ) !== false
+		           || strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 'Opera Mobi' ) !== false
 		) {
 			$is_mobile = true;
 		} else {
