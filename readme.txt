@@ -2,7 +2,7 @@
 
 Tags: mistake, mistype, spell, spelling error, report error
 Requires at least: 6.0.0
-Tested up to: 6.3
+Tested up to: 6.3.2
 Requires PHP: 7.4
 Stable tag: 1.0
 Contributors: natata7

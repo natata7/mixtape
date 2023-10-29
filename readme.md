@@ -1,10 +1,9 @@
 # Mixtape #
 
-**Tags:** mistake, mistype, spell, spelling error, report error
+**Tags:** mistake, mistype, spell, spelling error, report error  
 **Requires at least:** 6.0.0  
-**Tested up to:** 6.3.0  
+**Tested up to:** 6.3.2  
 **Requires PHP:** 7.4  
-**Stable tag:** 2.4.7  
 **License:** GPLv2 or later  
 **Contributors:** natata7  
 **Stable tag:** 1.0  
