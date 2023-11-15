@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mixtape\n"
-"POT-Creation-Date: 2023-07-14 11:27+0000\n"
+"POT-Creation-Date: 2023-11-15 20:51+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,164 +21,158 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: src/class-mixtape-abstract.php:92
+#: src/class-mixtape-abstract.php:141
 msgid ""
-"<b>Found an error?</b> Highlight the text and press the combination "
-"<em>Ctrl</em> + <em>Enter</em>."
+"If you have found a spelling error, please, notify us by selecting that text "
+"and pressing <em>Ctrl+Enter</em>."
 msgstr ""
-"<b>Знайшли помилку? </b> Виділіть текст на натисніть комбінацію <em>Ctrl</"
-"em> + <em>Enter</em>"
+"Знайшли помилку? Виділіть текст на натисніть комбінацію <em>Ctrl+Enter</em>."
 
-#: src/class-mixtape-abstract.php:128
+#: src/class-mixtape-abstract.php:175
 msgid "Spelling error report"
 msgstr "Звіт про орфографічну помилку"
 
-#: src/class-mixtape-abstract.php:129
+#: src/class-mixtape-abstract.php:176
 msgid "The following text will be sent to our editors:"
 msgstr "Наступний текст буде надіслано до нашої редакції:"
 
-#: src/class-mixtape-abstract.php:131
-msgid "Cancel"
-msgstr "Скасувати"
-
-#: src/class-mixtape-abstract.php:132
+#: src/class-mixtape-abstract.php:178
 msgid "Send"
 msgstr "Надіслати"
 
-#: src/class-mixtape-abstract.php:122, src/class-mixtape-ajax.php:93,
-#: src/class-mixtape-ajax.php:106
+#: src/class-mixtape-abstract.php:169, src/class-mixtape-ajax.php:132,
+#: src/class-mixtape-ajax.php:149
 msgid "Thanks!"
 msgstr "Дякую!"
 
-#: src/class-mixtape-abstract.php:123, src/class-mixtape-ajax.php:107
+#: src/class-mixtape-abstract.php:170, src/class-mixtape-ajax.php:150
 msgid "Our editors are notified."
 msgstr "Наша редакція повідомлена."
 
-#: src/class-mixtape-abstract.php:124
+#: src/class-mixtape-abstract.php:171
 msgid "Close"
 msgstr "Закрити"
 
-#: src/class-mixtape-abstract.php:136
+#: src/class-mixtape-abstract.php:182
 msgid "Your comment (optional)"
 msgstr "Ваш коментар (необов’язково)"
 
-#: src/class-mixtape-admin.php:59
+#: src/class-mixtape-admin.php:65
 msgid "Administrator"
 msgstr "Адміністратор"
 
-#: src/class-mixtape-admin.php:60
+#: src/class-mixtape-admin.php:66
 msgid "Editor"
 msgstr "Редактор"
 
-#: src/class-mixtape-admin.php:61
+#: src/class-mixtape-admin.php:67
 msgid "Specify other"
 msgstr "Вкажіть інше"
 
-#: src/class-mixtape-admin.php:65
+#: src/class-mixtape-admin.php:71
 msgid "Text"
 msgstr "Текст"
 
-#: src/class-mixtape-admin.php:66
+#: src/class-mixtape-admin.php:72
 msgid "Image"
 msgstr "Зображення"
 
-#: src/class-mixtape-admin.php:67
+#: src/class-mixtape-admin.php:73
 msgid "Do not show caption at the bottom of post"
 msgstr "Не показувати підпис унизу публікації"
 
-#: src/class-mixtape-admin.php:72
+#: src/class-mixtape-admin.php:78
 msgid "Default"
 msgstr "За замовчуванням"
 
-#: src/class-mixtape-admin.php:73
+#: src/class-mixtape-admin.php:79
 msgid "automatically translated to supported languages"
 msgstr "автоматично перекладено на підтримувані мови"
 
-#: src/class-mixtape-admin.php:76
+#: src/class-mixtape-admin.php:82
 msgid "Custom text"
 msgstr "Спеціальний текст"
 
-#: src/class-mixtape-admin.php:82
+#: src/class-mixtape-admin.php:88
 msgid "Just notify of successful submission"
 msgstr "Просто повідомте про успішне подання"
 
-#: src/class-mixtape-admin.php:83
+#: src/class-mixtape-admin.php:89
 msgid "Show preview of reported text and ask confirmation"
 msgstr ""
 "Показати попередній перегляд повідомленого тексту та запитати підтвердження"
 
-#: src/class-mixtape-admin.php:84
+#: src/class-mixtape-admin.php:90
 msgid "Preview and comment field"
 msgstr "Поле попереднього перегляду та коментарів"
 
-#: src/class-mixtape-admin.php:135
+#: src/class-mixtape-admin.php:149
 msgid "Configuration"
 msgstr "Конфігурація"
 
-#: src/class-mixtape-admin.php:141
+#: src/class-mixtape-admin.php:155
 msgid "Help"
 msgstr "Довідка"
 
-#: src/class-mixtape-admin.php:160
+#: src/class-mixtape-admin.php:176
 msgid "Statistics"
 msgstr "Статистика"
 
-#: src/class-mixtape-admin.php:166
+#: src/class-mixtape-admin.php:182
 msgid "Reports received up to date:"
 msgstr "Звіти отримані на сьогодні:"
 
-#: src/class-mixtape-admin.php:198
+#: src/class-mixtape-admin.php:214
 msgid "Email recipient"
 msgstr "Одержувач електронного листа"
 
-#: src/class-mixtape-admin.php:205
+#: src/class-mixtape-admin.php:221
 msgid "Post types"
 msgstr "Типи постів"
 
-#: src/class-mixtape-admin.php:212, src/class-mixtape-admin.php:824
+#: src/class-mixtape-admin.php:228, src/class-mixtape-admin.php:881
 msgid "Shortcodes"
 msgstr "Шорткоди"
 
-#: src/class-mixtape-admin.php:219
+#: src/class-mixtape-admin.php:235
 msgid "Caption format"
 msgstr "Формат підпису"
 
-#: src/class-mixtape-admin.php:226
+#: src/class-mixtape-admin.php:242
 msgid "Caption text mode"
 msgstr "Текстовий режим підпису"
 
-#: src/class-mixtape-admin.php:233
+#: src/class-mixtape-admin.php:249
 msgid "Icon before the caption text"
 msgstr "Значок перед текстом підпису"
 
-#: src/class-mixtape-admin.php:240
+#: src/class-mixtape-admin.php:256
 msgid "Color scheme"
 msgstr "Кольорова схема"
 
-#: src/class-mixtape-admin.php:247
+#: src/class-mixtape-admin.php:263
 msgid "Dialog mode"
 msgstr "Діалоговий режим"
 
-#: src/class-mixtape-admin.php:256
+#: src/class-mixtape-admin.php:272
 msgid "Multisite inheritance"
 msgstr "Багатосайтове успадкування"
 
-#: src/class-mixtape-admin.php:323
-#, fuzzy
+#: src/class-mixtape-admin.php:337
 msgctxt "select option, shown when no users with editor role are present"
 msgid "no editors found"
-msgstr "Не знайдено користувачів."
+msgstr "не знайдено користувачів"
 
-#: src/class-mixtape-admin.php:330
+#: src/class-mixtape-admin.php:344
 msgid "separate multiple recipients with commas"
 msgstr "розділіть кількох одержувачів комами"
 
-#: src/class-mixtape-admin.php:337
+#: src/class-mixtape-admin.php:351
 msgid "If post ID is determined, notify post author instead"
 msgstr ""
 "Якщо ідентифікатор публікації визначено, повідомити тільки автора публікації"
 
-#: src/class-mixtape-admin.php:358
+#: src/class-mixtape-admin.php:372
 msgid ""
 "\"Press Ctrl+Enter&hellip;\" captions will be displayed at the bottom of "
 "selected post types."
@@ -186,221 +180,223 @@ msgstr ""
 "«Натисніть Ctrl+Enter &hellip;» підписи відображатимуться внизу вибраних "
 "типів публікацій."
 
-#: src/class-mixtape-admin.php:372
-msgid "Register <code>[mixtape]</code> shortcode."
-msgstr "Зареєструвати шорткод <code>[mixtape]</code>."
+#: src/class-mixtape-admin.php:386
+msgid "Register "
+msgstr "Зареєструвати"
 
-#: src/class-mixtape-admin.php:376
+#: src/class-mixtape-admin.php:389
+msgid " shortcode."
+msgstr " шорткод."
+
+#: src/class-mixtape-admin.php:390
 msgid "Enable if manual caption insertion via shortcodes is needed."
 msgstr ""
 "Увімкніть, якщо потрібно ручне вставлення заголовків за допомогою коротких "
 "кодів."
 
-#: src/class-mixtape-admin.php:377
+#: src/class-mixtape-admin.php:391
 msgid "Usage examples are in Help section."
 msgstr "Приклади використання знаходяться в розділі Довідка."
 
-#: src/class-mixtape-admin.php:378
+#: src/class-mixtape-admin.php:392
 msgid ""
-"When enabled, mixtape Ctrl+Enter listener works on all pages, not only on "
+"When enabled, Mixtape Ctrl+Enter listener works on all pages, not only on "
 "enabled post types."
 msgstr ""
 "Якщо ввімкнути, слухач плагіну Ctrl+Enter працює на всіх сторінках, а не "
 "лише на ввімкнених типах публікацій."
 
-#: src/class-mixtape-admin.php:400
+#: src/class-mixtape-admin.php:414
 msgid "Enter the full image URL starting with http://"
 msgstr "Введіть повну URL-адресу зображення, починаючи з https://"
 
-#: src/class-mixtape-admin.php:442
+#: src/class-mixtape-admin.php:456
 msgid "no icon"
 msgstr "немає значка"
 
-#: src/class-mixtape-admin.php:466
+#: src/class-mixtape-admin.php:511
 msgid "default color"
 msgstr "колір за замовчуванням"
 
-#: src/class-mixtape-admin.php:490
+#: src/class-mixtape-admin.php:535
 msgid "Preview dialog"
 msgstr "Діалог попереднього перегляду"
 
-#: src/class-mixtape-admin.php:505
+#: src/class-mixtape-admin.php:550
 msgid "Copy settings from main site when new blog is created"
 msgstr ""
 "Копіювати налаштування з головного сайту під час створення нового блогу"
 
-#: src/class-mixtape-admin.php:578
+#: src/class-mixtape-admin.php:626
 msgid "ERROR: You didn't select valid email recipient."
 msgstr "ПОМИЛКА. Ви не вибрали дійсного одержувача електронної пошти."
 
-#: src/class-mixtape-admin.php:566
+#: src/class-mixtape-admin.php:614
 msgid "ERROR: You entered invalid email address: %s"
 msgstr "ПОМИЛКА: Ви ввели невірну електронну адресу: %s"
 
-#: src/class-mixtape-admin.php:606
+#: src/class-mixtape-admin.php:656
 msgid "ERROR: You didn't enter caption image URL."
 msgstr "ПОМИЛКА. Ви не ввели URL-адресу зображення підпису."
 
-#: src/class-mixtape-admin.php:653
+#: src/class-mixtape-admin.php:700
 msgid "Settings"
 msgstr "Налаштування"
 
-#: src/class-mixtape-admin.php:769
+#: src/class-mixtape-admin.php:824
 msgid ""
-"<strong>mixtape</strong> must now be <a href=\"%s\">configured</a> before "
+"<strong>Mixtape</strong> must now be <a href=\"%s\">configured</a> before "
 "use."
 msgstr ""
 "Перед використанням <strong>mixtape</strong> потрібно <a "
-"href=«%s»>налаштувати</a>."
+"href=\"%s\">налаштувати</a>."
 
-#: src/class-mixtape-admin.php:764
+#: src/class-mixtape-admin.php:818
 msgid ""
-"<strong>mixtape</strong> settings notice will be dismissed after saving "
+"<strong>Mixtape</strong> settings notice will be dismissed after saving "
 "changes."
 msgstr ""
 "Повідомлення про параметри <strong>mixtape</strong> буде закрито після "
 "збереження змін."
 
-#: src/class-mixtape-admin.php:825
+#: src/class-mixtape-admin.php:882
 msgid "Optional shortcode parameters are:"
 msgstr "Додаткові параметри короткого коду:"
 
-#: src/class-mixtape-admin.php:827
+#: src/class-mixtape-admin.php:884
 msgid "can be 'text' or 'image'"
 msgstr "може бути «текст» або «зображення»"
 
-#: src/class-mixtape-admin.php:828
+#: src/class-mixtape-admin.php:885
 msgid "override default css class"
 msgstr "замінити клас css за замовчуванням"
 
-#: src/class-mixtape-admin.php:829
+#: src/class-mixtape-admin.php:886
 msgid "override caption text"
 msgstr "замінити текст підпису"
 
-#: src/class-mixtape-admin.php:830
+#: src/class-mixtape-admin.php:887
 msgid "override image URL"
 msgstr "перевизначити URL-адресу зображення"
 
-#: src/class-mixtape-admin.php:832
+#: src/class-mixtape-admin.php:889
 msgid "When no parameters specified, general configuration is used."
 msgstr "Якщо параметри не вказано, використовується загальна конфігурація."
 
-#: src/class-mixtape-admin.php:833
+#: src/class-mixtape-admin.php:890
 msgid "If image url is specified, format parameter can be omitted."
 msgstr "Якщо вказано URL-адресу зображення, параметр format можна опустити."
 
-#: src/class-mixtape-admin.php:834
+#: src/class-mixtape-admin.php:891
 msgid "Shortcode usage example:"
 msgstr "Приклад використання шорткоду:"
 
-#: src/class-mixtape-admin.php:840
+#: src/class-mixtape-admin.php:897
 msgid "PHP code example:"
 msgstr "Приклад коду PHP:"
 
-#: src/class-mixtape-admin.php:850
+#: src/class-mixtape-admin.php:907
 msgid "Hooks"
 msgstr "Хуки"
 
-#: src/class-mixtape-admin.php:856
+#: src/class-mixtape-admin.php:914
 msgid "Allows to modify caption text globally (preferred over HTML filter)."
 msgstr "Дозволяє глобально змінювати текст підпису (бажано, ніж фільтр HTML)."
 
-#: src/class-mixtape-admin.php:864
+#: src/class-mixtape-admin.php:923
 msgid "Allows to modify the caption HTML before output."
 msgstr "Дозволяє змінювати HTML підпису перед виведенням."
 
-#: src/class-mixtape-admin.php:872
+#: src/class-mixtape-admin.php:932
 msgid "Allows to modify modal dialog strings (preferred over HTML filter)."
 msgstr "Дозволяє змінювати рядки модального діалогу (бажано, ніж HTML-фільтр)."
 
-#: src/class-mixtape-admin.php:880
+#: src/class-mixtape-admin.php:941
 msgid "Allows to modify the modal dialog HTML before output."
 msgstr "Дозволяє змінювати HTML модального діалогового вікна перед виведенням."
 
-#: src/class-mixtape-admin.php:889
+#: src/class-mixtape-admin.php:950
 msgid "Allows to override email sending logic."
 msgstr "Дозволяє змінювати логіку надсилання електронної пошти."
 
-#: src/class-mixtape-admin.php:894
+#: src/class-mixtape-admin.php:955
 msgid "Allows to change email recipient."
 msgstr "Дозволяє змінити одержувача електронної пошти."
 
-#: src/class-mixtape-admin.php:899
+#: src/class-mixtape-admin.php:960
 msgid "Allows to change email subject."
 msgstr "Дозволяє змінити тему електронного листа."
 
-#: src/class-mixtape-admin.php:904
+#: src/class-mixtape-admin.php:965
 msgid "Allows to modify email message to send."
 msgstr "Дозволяє змінювати повідомлення електронної пошти для надсилання."
 
-#: src/class-mixtape-admin.php:909
+#: src/class-mixtape-admin.php:971
 msgid ""
 "Allows for custom reports handling. Refer to code for implementation details."
 msgstr ""
 "Дозволяє обробку спеціальних звітів. Зверніться до коду для деталей "
 "реалізації."
 
-#: src/class-mixtape-admin.php:917
+#: src/class-mixtape-admin.php:980
 msgid "Allows to modify global options array during initialization."
 msgstr "Дозволяє змінювати глобальний масив параметрів під час ініціалізації."
 
-#: src/class-mixtape-admin.php:925
+#: src/class-mixtape-admin.php:989
 msgid ""
 "Allows to add custom logic for whether to output Mixtape to front end or not."
 msgstr ""
 "Дозволяє додати настроювану логіку для того, чи виводити Mixtape у інтерфейс "
 "чи ні."
 
-#: src/class-mixtape-ajax.php:73, src/class-mixtape-ajax.php:81,
-#: src/class-mixtape-ajax.php:111
+#: src/class-mixtape-ajax.php:108, src/class-mixtape-ajax.php:118,
+#: src/class-mixtape-ajax.php:156
 msgid "Report not sent"
 msgstr "Звіт не надіслано"
 
-#: src/class-mixtape-ajax.php:74
+#: src/class-mixtape-ajax.php:109
 msgid "Spam protection: too many reports from your IP address."
 msgstr "Захист від спаму: забагато звітів із вашої IP-адреси."
 
-#: src/class-mixtape-ajax.php:82
+#: src/class-mixtape-ajax.php:119
 msgid "No text selected."
 msgstr "Текст не вибрано."
 
-#: src/class-mixtape-ajax.php:94
+#: src/class-mixtape-ajax.php:133
 msgid ""
 "Our editors already got notified about this error. Thanks for your care."
 msgstr "Нашу редакцію вже сповістили про цю помилку. Дякуємо за вашу турботу."
 
-#: src/class-mixtape-ajax.php:112
+#: src/class-mixtape-ajax.php:157
 msgid "Email service returned an error while trying to deliver your report."
 msgstr ""
 "Служба електронної пошти повернула помилку під час спроби доставити ваш звіт."
 
-#: src/class-mixtape-ajax.php:193
-#, fuzzy
+#: src/class-mixtape-ajax.php:247
 msgid "Reported from page:"
-msgstr "(від)"
+msgstr "Повідомлено зі сторінки:"
 
-#: src/class-mixtape-ajax.php:194
+#: src/class-mixtape-ajax.php:248
 msgctxt "[Email] Reported from page: unknown"
 msgid "unknown"
-msgstr "Невідомо"
+msgstr "невідомо"
 
-#: src/class-mixtape-ajax.php:200
-#, fuzzy
+#: src/class-mixtape-ajax.php:255
 msgid "Post edit URL:"
-msgstr "Список звʼязаних постів до поточного посту"
+msgstr "Посилання для редагування:"
 
-#: src/class-mixtape-ajax.php:206
+#: src/class-mixtape-ajax.php:261
 msgid "Reported by:"
 msgstr "Повідомив:"
 
-#: src/class-mixtape-ajax.php:209
+#: src/class-mixtape-ajax.php:264
 msgid "Reported text"
 msgstr "Повідомлений текст"
 
-#: src/class-mixtape-ajax.php:213
+#: src/class-mixtape-ajax.php:268
 msgid "Comment:"
 msgstr "Коментар:"
 
-#: src/class-mixtape-ajax.php:224
+#: src/class-mixtape-ajax.php:279
 msgid "Spelling error reported"
 msgstr "Повідомлено про орфографічну помилку"

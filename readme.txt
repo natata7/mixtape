@@ -2,9 +2,9 @@
 
 Tags: mistake, mistype, spell, spelling error, report error
 Requires at least: 6.0.0
-Tested up to: 6.3.2
+Tested up to: 6.4.1
 Requires PHP: 7.4
-Stable tag: 1.0
+Stable tag: 1.0.1
 Contributors: natata7
 License: GPLv2 or later
 
