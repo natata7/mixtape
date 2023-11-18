@@ -161,13 +161,7 @@ class Mixtape extends Mixtape_Abstract {
 	public function custom_styles() {
 		echo '
 		<style type="text/css">
-			.mixtape-test, .mixtape_mistake_inner {color: ' . esc_html( $this->options['color_scheme'] ) . ' !important;}
-			#mixtape_dialog h2::before, #mixtape_dialog .mixtape_action, .mixtape-letter-back {background-color: ' . esc_html( $this->options['color_scheme'] ) . ' !important; }
-			#mixtape_reported_text:before, #mixtape_reported_text:after {border-color: ' . esc_html( $this->options['color_scheme'] ) . ' !important;}
-            .mixtape-letter-front .front-left {border-left-color: ' . esc_html( $this->options['color_scheme'] ) . ' !important;}
-            .mixtape-letter-front .front-right {border-right-color: ' . esc_html( $this->options['color_scheme'] ) . ' !important;}
-            .mixtape-letter-front .front-bottom, .mixtape-letter-back > .mixtape-letter-back-top, .mixtape-letter-top {border-bottom-color: ' . esc_html( $this->options['color_scheme'] ) . ' !important;}
-            .mixtape-logo svg {fill: ' . esc_html( $this->options['color_scheme'] ) . ' !important;}
+			body {--mixtape--main-color:' . esc_html( $this->options['color_scheme'] ) . '; }
 		</style>
 		';
 	}

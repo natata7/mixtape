@@ -6,7 +6,7 @@
 **Requires PHP:** 7.4  
 **License:** GPLv2 or later  
 **Contributors:** natata7  
-**Stable tag:** 1.0.1  
+**Stable tag:** 1.1  
 **License URI:** <http://www.gnu.org/licenses/gpl-2.0.html>
 
 ## Description ##
@@ -31,6 +31,10 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to Settings > Mixtape and set options.
+
+### 1.1 ###
+
+* Add: the ability to send a bug report from a mobile device.
 
 ### 1.0 ###
 

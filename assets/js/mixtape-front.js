@@ -305,11 +305,7 @@
     return;
   }
 
-  var getPointerEvent = function (event) {
-    return event.originalEvent.targetTouches
-      ? event.originalEvent.targetTouches[0]
-      : event;
-  };
+  var reportButton;
 
   window.mixtape = $.extend(window.mixtape, {
     onReady: function () {
@@ -331,6 +327,7 @@
             mixtape.reportSpellError(data);
           }
           mixtape.animateLetter();
+          mixtape.hideReportButton();
         }
       });
 
@@ -348,6 +345,17 @@
           var report = mixtape.getSelectionData();
           if (report) {
             mixtape.showDialog(report);
+          }
+        }
+      });
+
+      document.addEventListener("selectionchange", function () {
+        if ($("#mixtape_dialog.dialog--open").length === 0) {
+          var selection = window.getSelection().toString().trim();
+          if (selection !== "" && window.innerWidth < 1024) {
+            mixtape.showReportButton();
+          } else {
+            mixtape.hideReportButton();
           }
         }
       });
@@ -1038,6 +1046,43 @@
     restoreInitSelection: function (sel, initialSel) {
       sel.collapse(initialSel.anchorNode, initialSel.anchorOffset);
       sel.extend(initialSel.focusNode, initialSel.focusOffset);
+    },
+
+    showReportButton: function () {
+      if (!reportButton) {
+        reportButton = $("<button>")
+          .text(mixtape.reportError)
+          .addClass("mixtape-report-button")
+          .on("click", function () {
+            const report = mixtape.getSelectionData();
+            if (report) {
+              mixtape.showDialog(report);
+            }
+          });
+
+        $("body").append(reportButton);
+      }
+
+      const selection = window.getSelection();
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+
+      const buttonHeight = reportButton.outerHeight();
+
+      const topPosition = rect.top + window.scrollY - 20 - buttonHeight;
+
+      reportButton.css({
+        top: topPosition + "px",
+        left: rect.left + window.scrollX + "px",
+        position: "absolute",
+      });
+    },
+
+    hideReportButton: function () {
+      if (reportButton) {
+        reportButton.remove();
+        reportButton = null;
+      }
     },
   });
 

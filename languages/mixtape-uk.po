@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mixtape\n"
-"POT-Creation-Date: 2023-11-15 20:51+0000\n"
+"POT-Creation-Date: 2023-11-18 22:38+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,6 +56,10 @@ msgstr "Закрити"
 #: src/class-mixtape-abstract.php:182
 msgid "Your comment (optional)"
 msgstr "Ваш коментар (необов’язково)"
+
+#: src/class-mixtape-abstract.php:318
+msgid "Report an error"
+msgstr "Повідомити про помилку"
 
 #: src/class-mixtape-admin.php:65
 msgid "Administrator"

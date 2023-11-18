@@ -14,3 +14,16 @@ gulp.task("make-pot", function () {
     )
     .pipe(gulp.dest("languages/mixtape.pot"));
 });
+
+gulp.task("phpcs", function () {
+  return gulp
+    .src(["src/**/*.php", "!src/vendor/**/*.*"])
+
+    .pipe(
+      phpcs({
+        bin: "vendor/bin/phpcs",
+      })
+    )
+
+    .pipe(phpcs.reporter("log"));
+});

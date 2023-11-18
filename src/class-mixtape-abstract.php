@@ -313,7 +313,11 @@ abstract class Mixtape_Abstract {
 			filemtime( plugin_dir_path( self::$plugin_path ) . '/assets/js/mixtape-front.js' ),
 			true
 		);
-		wp_localize_script( 'mixtape-front', 'mixtape', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		$localized_data = array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'reportError' => __( 'Report an error', 'mixtape' ),
+		);
+		wp_localize_script( 'mixtape-front', 'mixtape', $localized_data );
 	}
 
 	public static function create_db() {
