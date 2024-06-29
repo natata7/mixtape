@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "make-pot": "gulp make-pot",
-    "phpcs": "gulp phpcs"
+    "phpcs": "gulp phpcs",
+    "test": "npx playwright test --ui"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "@types/node": "^20.14.9",
     "gulp": "^4.0.2",
     "gulp-phpcs": "^3.1.0",
     "gulp-wp-pot": "^2.5.0"

@@ -300,7 +300,7 @@ abstract class Mixtape_Abstract {
 		wp_enqueue_style( 'mixtape-front', plugins_url( 'assets/css/mixtape-front.css', self::$plugin_path ), array(), self::$version );
 
 		// modernizer
-		wp_enqueue_script( 'modernizr', plugins_url( 'assets/js/modernizr.custom.js', self::$plugin_path ), array( 'jquery' ), self::$version, true );
+		//wp_enqueue_script( 'modernizr', plugins_url( 'assets/js/modernizr.custom.js', self::$plugin_path ), array( 'jquery' ), self::$version, true );
 
 		// frontend script (combined)
 		wp_enqueue_script(
@@ -308,7 +308,7 @@ abstract class Mixtape_Abstract {
 			plugins_url( 'assets/js/mixtape-front.js', self::$plugin_path ),
 			array(
 				'jquery',
-				'modernizr',
+				//'modernizr',
 			),
 			filemtime( plugin_dir_path( self::$plugin_path ) . '/assets/js/mixtape-front.js' ),
 			true
@@ -317,7 +317,7 @@ abstract class Mixtape_Abstract {
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'reportError' => __( 'Report an error', 'mixtape' ),
 		);
-		wp_localize_script( 'mixtape-front', 'mixtape', $localized_data );
+		wp_localize_script( 'mixtape-front', 'MixtapeLocalize', $localized_data );
 	}
 
 	public static function create_db() {
