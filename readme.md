@@ -8,10 +8,9 @@
 **Contributors:** natata7  
 **Stable tag:** 1.2
 **License URI:** <http://www.gnu.org/licenses/gpl-2.0.html>
+Mixtape is lightweight plugin, that allows readers to effortlessly notify site staff about found spelling errors.
 
 ## Description ##
-
-Mixtape is lightweight plugin, that allows readers to effortlessly notify site staff about found spelling errors.
 
 On Ctrl+Enter event, the plugin sends selected text along with paragraph and page URL it belongs to an email address selected in admin settings page. You can choose among administrators and editors, or specify another address.
 
