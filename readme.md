@@ -1,6 +1,6 @@
 # Mixtape #
 
-**Tags:** mistake, mistype, spell, spelling error, report error  
+**Tags:** mistake, mistype, report error  
 **Requires at least:** 6.0.0  
 **Tested up to:** 6.4.1  
 **Requires PHP:** 7.4  
