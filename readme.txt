@@ -8,6 +8,7 @@ Stable tag: 1.2
 Contributors: natata7
 License: GPLv2 or later
 
+== Description ==
 Mixtape is lightweight plugin, that allows readers to effortlessly notify site staff about found spelling errors.
 
 On Ctrl+Enter event, the plugin sends selected text along with paragraph and page URL it belongs to an email address selected in admin settings page. You can choose among administrators and editors, or specify another address.
