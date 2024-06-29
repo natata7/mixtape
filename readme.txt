@@ -4,7 +4,7 @@ Tags: mistake, mistype, spell, spelling error, report error
 Requires at least: 6.0.0
 Tested up to: 6.4.1
 Requires PHP: 7.4
-Stable tag: 1.1
+Stable tag: 1.2
 Contributors: natata7
 License: GPLv2 or later
 
@@ -26,6 +26,10 @@ Please report any bugs, errors, warnings, code problems to [Github](https://gith
 == Installation ==
 1. Look up "Mixtape" and and install it from plugins section of your site's admin area. Alternatively, download zip from WordPress.org Plugin Directory and extract its contents to wp-content/plugins directory.
 2. Activate and follow the settings link in the notice you will see at the top. Tick desired checkboxes, save, and that's it!
+
+== 1.2 ==
+
+* Fix: sending reports on front on some cases.
 
 == 1.1 ==
 
